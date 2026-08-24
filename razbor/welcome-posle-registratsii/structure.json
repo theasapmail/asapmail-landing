@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Добро пожаловать! Остался один шаг",
+  "preheader": "Подключите сайт — и первые отчёты по посетителям появятся уже сегодня.",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [24, 8],
+      "blocks": [
+        {
+          "id": "b-header-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "Сервис аналитики",
+          "href": null,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-hero",
+      "background": "#FFFFFF",
+      "padding": [16, 0],
+      "blocks": [
+        {
+          "id": "b-hero-image",
+          "type": "image",
+          "src": "{{ASSETS_BASE}}/hero-600x240.jpg",
+          "width": 600,
+          "height": 240,
+          "alt": "Отчёты сервиса аналитики на экране",
+          "href": null,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-intro",
+      "background": "#FFFFFF",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-intro-h1",
+          "type": "text",
+          "role": "h1",
+          "text": "Добро пожаловать!",
+          "align": "left"
+        },
+        {
+          "id": "b-intro-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Вы зарегистрировались в сервисе аналитики — теперь у вас есть место, где видно, откуда приходят посетители сайта, что они читают и на чём уходят.",
+          "align": "left"
+        },
+        {
+          "id": "b-intro-step",
+          "type": "text",
+          "role": "p",
+          "text": "Чтобы отчёты начали наполняться, остался один шаг — подключить сайт. Это пара минут: код счётчика вставляется на страницы, дальше сервис собирает данные сам.",
+          "align": "left"
+        },
+        {
+          "id": "b-intro-cta",
+          "type": "button",
+          "text": "Подключить сайт",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-steps",
+      "background": "#F5F5F5",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-steps-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Что дальше",
+          "align": "left"
+        },
+        {
+          "id": "b-steps-list",
+          "type": "list",
+          "items": [
+            "Подключите сайт: добавьте код счётчика на все страницы.",
+            "Дождитесь первых данных — обычно они появляются в течение часа.",
+            "Откройте отчёты: источники трафика, популярные страницы, конверсии."
+          ]
+        },
+        {
+          "id": "b-steps-help",
+          "type": "text",
+          "role": "small",
+          "text": "Что-то не получилось? Ответьте на это письмо — разберёмся вместе.",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#FFFFFF",
+      "padding": [24, 24],
+      "blocks": [
+        { "id": "b-footer-line", "type": "divider" },
+        {
+          "id": "b-footer-legal",
+          "type": "footer",
+          "links": [{ "text": "Отписаться от писем", "href": "{{UNSUBSCRIBE_URL}}" }]
+        }
+      ]
+    }
+  ]
+}

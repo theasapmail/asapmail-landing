@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кнопка для email-письма — генератор bulletproof HTML</title>
+<meta name="description" content="Бесплатный генератор кнопки для письма: кликается вся плашка, отступы продублированы для Outlook, текст не переносится. Код по проверенному в бою паттерну, всё в браузере.">
+<link rel="canonical" href="https://theasapmail.github.io/asapmail-landing/knopka-dlya-pisma/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="email-verstka">
+<meta property="og:title" content="Кнопка для email-письма — генератор bulletproof HTML"><meta property="og:description" content="Бесплатный генератор кнопки для письма: кликается вся плашка, отступы продублированы для Outlook, текст не переносится. Код по проверенному в бою паттерну, всё в браузере.">
+<meta property="og:url" content="https://theasapmail.github.io/asapmail-landing/knopka-dlya-pisma/"><meta property="og:image" content="https://theasapmail.github.io/asapmail-landing/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="../site.css">
+<!-- Яндекс Метрика: впишите номер счётчика вместо YM_ID и раскомментируйте.
+<script type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(YM_ID,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});</script>
+-->
+</head><body><style>
+.gen{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.gen label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+.gen input,.gen select{width:100%;height:44px;background:#070910;border:1px solid var(--line-2);border-radius:10px;padding:0 12px;color:#C9D5E3}
+.gen input:focus,.gen select:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px rgba(59,107,255,.25)}
+.gen input[type=color]{padding:4px 6px;cursor:pointer}
+.prevrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px}
+.prevbox{border:1px solid var(--line);border-radius:14px;padding:34px 20px;display:flex;align-items:center;justify-content:center}
+.prevbox--light{background:#F5F6F8}.prevbox--dark{background:#111111}
+.gen-notes{margin-top:14px;font-size:14px;color:var(--warn)}.gen-notes li{margin-top:6px}
+</style><header class="top" data-top><div class="wrap top__in">
+  <a class="logo" href="../"><i aria-hidden="true"></i>email-verstka</a>
+  <nav class="nav" id="nav" aria-label="Разделы"><a href="../#shablony">Готовые письма</a><a href="../#sborka">Сборка из брифа</a><a href="../razbor/">Примеры</a><a href="../proverka/">Проверить письмо</a></nav>
+  <div class="top__right"><a class="ghostlink" href="../en/">EN</a><a class="btn" href="../#beta">Попасть в бету</a><button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav" data-burger><span></span><span></span><span></span></button></div>
+</div></header>
+<main>
+<div class="wrap"><nav class="crumbs" aria-label="Хлебные крошки"><a href="../">Главная</a><span>/</span>Кнопка для письма</nav></div>
+<section class="wrap" style="padding-top:22px;padding-bottom:clamp(32px,5vw,48px)">
+  <p class="kicker">Бесплатно · в браузере · ничего не отправляется</p>
+  <h1 class="h1">Кнопка, которая переживёт Outlook</h1>
+  <p class="lead">Настройте текст, цвета и отступы — получите HTML кнопки по паттерну, проверенному в боевых рассылках: кликается вся плашка, а не только надпись, отступы продублированы для Outlook через <code>mso-padding-alt</code>, подпись не переносится на вторую строку. Без картинок и VML.</p>
+</section>
+<section class="wrap lintform">
+  <div class="lintform__in">
+    <div class="gen">
+      <div><label for="f-text">Текст</label><input id="f-text" value="Купить"></div>
+      <div><label for="f-url">Ссылка</label><input id="f-url" value="https://example.com/"></div>
+      <div><label for="f-bg">Фон</label><input id="f-bg" type="color" value="#3b6bff"></div>
+      <div><label for="f-color">Текст (цвет)</label><input id="f-color" type="color" value="#ffffff"></div>
+      <div><label for="f-radius">Скругление, px</label><input id="f-radius" type="number" min="0" max="40" value="8"></div>
+      <div><label for="f-size">Шрифт, px</label><input id="f-size" type="number" min="11" max="28" value="16"></div>
+      <div><label for="f-pv">Отступ сверху/снизу</label><input id="f-pv" type="number" min="6" max="30" value="13"></div>
+      <div><label for="f-ph">Отступ слева/справа</label><input id="f-ph" type="number" min="10" max="60" value="22"></div>
+      <div><label for="f-font">Гарнитура</label><select id="f-font"><option>Arial</option><option>Verdana</option><option>Tahoma</option><option>Georgia</option></select></div>
+    </div>
+    <div class="prevrow" data-gen>
+      <div><p class="lintform__label">На светлом фоне</p><div class="prevbox prevbox--light" data-prev-light></div></div>
+      <div><p class="lintform__label">В тёмной теме</p><div class="prevbox prevbox--dark" data-prev-dark></div></div>
+    </div>
+    <ul class="gen-notes" data-notes></ul>
+  </div>
+  <div class="lintform__out">
+    <label for="res" class="lintform__label">HTML кнопки — вставьте в ячейку письма</label>
+    <textarea id="res" class="lintform__ta" style="min-height:220px" readonly spellcheck="false" data-code></textarea>
+    <div class="lintform__row"><button class="btn" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+<section class="section"><div class="wrap split">
+  <div><h2 class="h2">Почему именно такой код</h2></div>
+  <ul class="results">
+    <li>отступы и <code>display:block</code> висят на ссылке, а не на ячейке — кликается вся плашка, промахнуться пальцем мимо надписи нельзя</li>
+    <li><code>mso-padding-alt</code> на ячейке повторяет отступы для Outlook: там padding на ссылке не срабатывает, и без него кнопка схлопнется до текста</li>
+    <li><code>white-space:nowrap</code> запрещает перенос — кнопка в две строки почти всегда сломанная кнопка</li>
+    <li>никаких картинок: при выключенной загрузке изображений кнопка — то, что обязано остаться</li>
+  </ul>
+</div></section>
+<section class="wrap" style="padding-bottom:clamp(24px,4vw,40px)"><p class="sub">Ещё бесплатное: <a href="../proverka/">проверка письма линтером</a>, <a href="../szhatie-html/">сжатие HTML</a> и <a href="../szhatie-css/">сжатие CSS</a>.</p></section>
+</main>
+<section class="cta section--alt"><div class="wrap"><h2 class="h2">Хотите такое же письмо под свой бренд?</h2><p>Бета открыта для первых 20 команд — бесплатно, на ваших брифах.</p><a class="btn btn--lg" href="../#beta">Попасть в бету</a></div></section><footer class="foot">
+  <div class="wrap">
+    <div class="foot__cols">
+      <div>
+        <h4>О продукте</h4>
+        <ul>
+          <li><a href="../#sborka">Как работает</a></li>
+          <li><a href="../proverka/">Проверить своё письмо</a></li>
+          <li><a href="../szhatie-html/">Сжать HTML</a></li>
+          <li><a href="../szhatie-css/">Сжать CSS</a></li>
+          <li><a href="../knopka-dlya-pisma/">Кнопка для письма</a></li>
+          <li><a href="../prevyu-vhodyashchih/">Превью входящих</a></li>
+          <li><a href="../#faq">Вопросы</a></li>
+          <li><a href="../en/" lang="en">English</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Сервис</h4>
+        <ul>
+          <li><a href="../#sborka">Сборка из брифа</a></li>
+          <li><a href="../#nadyozhno">Бренд с сайта</a></li>
+          <li><a href="../#faq">Правки словами</a></li>
+          <li><a href="../#tarify">Тарифы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Готовые письма</h4>
+        <ul>
+          <li><a href="../razbor/welcome-posle-registratsii/">Welcome: после регистрации</a></li>
+          <li><a href="../razbor/welcome-kurs-osnovy-illyustratsii/">Welcome: запись на курс</a></li>
+          <li><a href="../razbor/zakaz-prinyat/">Заказ принят</a></li>
+          <li><a href="../razbor/promo-rasprodazha-avgust/">Промо: скидка на каталог</a></li>
+          <li><a href="../razbor/osennyaya-kollektsiya/">Промо: осенняя коллекция</a></li>
+          <li><a href="../razbor/daydzhest-avgusta/">Дайджест месяца</a></li>
+          <li><a href="../razbor/anons-vebinara-email-marketing/">Анонс вебинара</a></li>
+          <li><a href="../razbor/govuk-uvedomlenie/">Уведомление о заявлении</a></li>
+          <li><a href="../razbor/wikipedia-ezhegodnyy-sbor/">Сбор пожертвований</a></li>
+          <li><a class="more more--muted" href="../razbor/">Все примеры</a></li>
+        </ul>
+      </div>
+      <div class="foot__box">
+        <h4>Бета открыта</h4>
+        <p>Первые 20 команд собирают письма бесплатно и получают тариф ниже публичного после запуска.</p>
+        <a class="btn btn--block" href="../#beta">Попасть в бету</a>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 email-verstka · ASAP Mail. Все права защищены. Сайт обновляется автоматически из основного репозитория.</span>
+      <span><a href="#">Условия использования</a><a href="#">Конфиденциальность</a></span>
+    </div>
+  </div>
+</footer>
+<script src="knopka.js"></script>
+<script>(function(){var b=document.querySelector('[data-burger]'),n=document.getElementById('nav');if(!b||!n)return;b.addEventListener('click',function(){var o=n.classList.toggle('is-open');b.setAttribute('aria-expanded',String(o));document.body.classList.toggle('nav-open',o)});n.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('is-open');b.setAttribute('aria-expanded','false');document.body.classList.remove('nav-open')}})})();</script>
+</body></html>

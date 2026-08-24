@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Вебинар 5 сентября: email-маркетинг без потерь",
+  "preheader": "Разберём доставляемость, тёмную тему и метрики. Начало в 19:00, 60 минут.",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "Логотип отправителя",
+          "href": null
+        }
+      ]
+    },
+    {
+      "id": "s-hero",
+      "background": "#FFFFFF",
+      "padding": [8, 32],
+      "blocks": [
+        {
+          "id": "b-hero-title",
+          "type": "text",
+          "role": "h1",
+          "text": "Вебинар: email-маркетинг без потерь",
+          "align": "left"
+        },
+        {
+          "id": "b-hero-lead",
+          "type": "text",
+          "role": "p",
+          "text": "5 сентября разберём, почему письма не доходят, разваливаются в почтовых клиентах и не приносят переходов. Для тех, кто сам готовит рассылки.",
+          "align": "left"
+        },
+        {
+          "id": "b-hero-img",
+          "type": "image",
+          "src": "{{ASSETS_BASE}}/hero-552x276.jpg",
+          "width": 552,
+          "height": 276,
+          "alt": "Баннер: вебинар по email-маркетингу 5 сентября",
+          "href": null
+        }
+      ]
+    },
+    {
+      "id": "s-programma",
+      "background": "#F5F5F5",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-programma-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Что разберём",
+          "align": "left"
+        },
+        {
+          "id": "b-programma-list",
+          "type": "list",
+          "items": [
+            "Доставляемость: почему письмо уходит в спам и что с этим делать до отправки.",
+            "Вёрстка под тёмную тему: где выворачиваются цвета и как их удержать.",
+            "Метрики после отправки: что читать в отчёте, а что игнорировать."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s-registratsiya",
+      "background": "#FFFFFF",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-cta-when",
+          "type": "text",
+          "role": "p",
+          "text": "5 сентября, 19:00 по московскому времени. 60 минут и ответы на вопросы.",
+          "align": "center"
+        },
+        {
+          "id": "b-cta-button",
+          "type": "button",
+          "text": "Зарегистрироваться",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#F5F5F5",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-footer",
+          "type": "footer",
+          "links": [{ "text": "Отписаться", "href": "{{UNSUBSCRIBE_URL}}" }]
+        }
+      ]
+    }
+  ]
+}

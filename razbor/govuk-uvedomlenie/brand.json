@@ -1,0 +1,23 @@
+{
+  "source": "site",
+  "logo": { "src": "{{ASSETS_BASE}}/logo-200x60.png", "width": 200, "height": 60 },
+  "colors": {
+    "background": "#FFFFFF",
+    "surface": "#F4F8FB",
+    "text": "#0B0C0C",
+    "muted": "#484949",
+    "accent": "#1D70B8",
+    "buttonText": "#FFFFFF"
+  },
+  "font": {
+    "heading": "Arial, Helvetica, sans-serif",
+    "body": "Arial, Helvetica, sans-serif",
+    "webfont": null
+  },
+  "radius": 0,
+  "tone": "formal",
+  "overrides": {
+    "logo": "default",
+    "colors.buttonText": "default"
+  }
+}

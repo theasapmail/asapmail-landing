@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Дайджест августа: пять статей об управлении командой",
+  "preheader": "Найм в аврале, обратная связь, встречи один на один, выгорание и делегирование.",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "Логотип отправителя",
+          "href": null
+        }
+      ]
+    },
+    {
+      "id": "s-hero",
+      "background": "#FFFFFF",
+      "padding": [8, 32],
+      "blocks": [
+        {
+          "id": "b-hero-title",
+          "type": "text",
+          "role": "h1",
+          "text": "Дайджест августа",
+          "align": "left"
+        },
+        {
+          "id": "b-hero-lead",
+          "type": "text",
+          "role": "p",
+          "text": "За август в блоге вышло пять статей про управление командой: про найм, разговоры один на один и то, что делает работу команды спокойнее. Каждая — минут на десять чтения.",
+          "align": "left"
+        },
+        {
+          "id": "b-hero-img",
+          "type": "image",
+          "src": "{{ASSETS_BASE}}/hero-552x276.jpg",
+          "width": 552,
+          "height": 276,
+          "alt": "Баннер: дайджест блога про управление командой за август",
+          "href": null
+        }
+      ]
+    },
+    {
+      "id": "s-materialy",
+      "background": "#FFFFFF",
+      "padding": [8, 32],
+      "blocks": [
+        {
+          "id": "b-art-1-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Как нанимать, когда горит",
+          "align": "left"
+        },
+        {
+          "id": "b-art-1-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Спешка в найме обходится дороже пустой вакансии. Разбираем, какие шаги нельзя пропускать даже в аврале.",
+          "align": "left"
+        },
+        {
+          "id": "b-art-1-link",
+          "type": "text",
+          "role": "p",
+          "text": "Читать статью",
+          "align": "left"
+        },
+        { "id": "b-div-1", "type": "divider" },
+        {
+          "id": "b-art-2-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Обратная связь, которую слышат",
+          "align": "left"
+        },
+        {
+          "id": "b-art-2-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Почему «ты молодец» и «переделай» одинаково бесполезны. Из чего собран разговор, после которого что-то меняется.",
+          "align": "left"
+        },
+        {
+          "id": "b-art-2-link",
+          "type": "text",
+          "role": "p",
+          "text": "Читать статью",
+          "align": "left"
+        },
+        { "id": "b-div-2", "type": "divider" },
+        {
+          "id": "b-art-3-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Один на один: полчаса, которые окупаются",
+          "align": "left"
+        },
+        {
+          "id": "b-art-3-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Что спрашивать, о чём лучше промолчать и почему встречу нельзя переносить второй раз подряд.",
+          "align": "left"
+        },
+        {
+          "id": "b-art-3-link",
+          "type": "text",
+          "role": "p",
+          "text": "Читать статью",
+          "align": "left"
+        },
+        { "id": "b-div-3", "type": "divider" },
+        {
+          "id": "b-art-4-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Выгорание видно раньше, чем о нём скажут",
+          "align": "left"
+        },
+        {
+          "id": "b-art-4-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Сотрудник ещё не жалуется, а команда уже теряет темп. Пять сигналов, которые заметны руководителю первыми.",
+          "align": "left"
+        },
+        {
+          "id": "b-art-4-link",
+          "type": "text",
+          "role": "p",
+          "text": "Читать статью",
+          "align": "left"
+        },
+        { "id": "b-div-4", "type": "divider" },
+        {
+          "id": "b-art-5-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Делегировать, не теряя качество",
+          "align": "left"
+        },
+        {
+          "id": "b-art-5-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Что делать, когда быстрее сделать самому. И почему «быстрее самому» — ловушка, из которой команда не растёт.",
+          "align": "left"
+        },
+        {
+          "id": "b-art-5-link",
+          "type": "text",
+          "role": "p",
+          "text": "Читать статью",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-blog",
+      "background": "#F5F5F5",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-blog-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Архив прошлых выпусков и всё, что выходило раньше, — в блоге.",
+          "align": "center"
+        },
+        {
+          "id": "b-blog-cta",
+          "type": "button",
+          "text": "Читать в блоге",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "center"
+        },
+        {
+          "id": "b-blog-tg",
+          "type": "text",
+          "role": "small",
+          "text": "Короткие заметки между выпусками — в нашем телеграм-канале.",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#F5F5F5",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-footer",
+          "type": "footer",
+          "links": [{ "text": "Отписаться", "href": "{{UNSUBSCRIBE_URL}}" }]
+        }
+      ]
+    }
+  ]
+}

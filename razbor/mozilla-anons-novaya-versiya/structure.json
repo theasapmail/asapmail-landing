@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Вышла новая версия браузера: меньше слежки, быстрее страницы",
+  "preheader": "Усиленная защита от трекеров и ускоренная загрузка страниц уже в обновлении",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "Логотип отправителя",
+          "href": null
+        }
+      ]
+    },
+    {
+      "id": "s-hero",
+      "background": "#FFFFFF",
+      "padding": [8, 32],
+      "blocks": [
+        {
+          "id": "b-hero-title",
+          "type": "text",
+          "role": "h1",
+          "text": "Вышла новая версия браузера",
+          "align": "left"
+        },
+        {
+          "id": "b-hero-lead",
+          "type": "text",
+          "role": "p",
+          "text": "В обновлении две главные вещи. Защита от трекеров стала строже: сайтам труднее следить за вами от вкладки к вкладке. И страницы теперь открываются быстрее — браузер меньше ждёт и раньше показывает содержимое.",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-chto-novogo",
+      "background": "#F5F5F5",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-novoe-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Что изменилось",
+          "align": "left"
+        },
+        {
+          "id": "b-novoe-list",
+          "type": "list",
+          "items": [
+            "Больше защиты от трекеров. Скрытые счётчики и межсайтовые куки блокируются по умолчанию, и реклама перестаёт ходить за вами по сайтам.",
+            "Выше скорость. Страницы загружаются заметно быстрее: браузер экономнее расходует память и раньше отрисовывает то, что вы уже видите."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s-obnovit",
+      "background": "#FFFFFF",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-cta-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Обновление занимает пару минут, вкладки и закладки останутся на месте.",
+          "align": "center"
+        },
+        {
+          "id": "b-cta-button",
+          "type": "button",
+          "text": "Обновить браузер",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#F5F5F5",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-footer",
+          "type": "footer",
+          "links": [{ "text": "Отписаться", "href": "{{UNSUBSCRIBE_URL}}" }]
+        }
+      ]
+    }
+  ]
+}

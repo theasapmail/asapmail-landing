@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Заявление получено: рассмотрение до десяти рабочих дней",
+  "preheader": "Дальнейших действий не требуется: статус заявления виден в личном кабинете.",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#0B0C0C",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "GOV.UK",
+          "href": null,
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-notice",
+      "background": "#FFFFFF",
+      "padding": [40, 40],
+      "blocks": [
+        { "id": "b-title", "type": "text", "role": "h1", "text": "Заявление получено", "align": "left" },
+        {
+          "id": "b-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Мы получили ваше заявление и зарегистрировали его. Сейчас никаких действий от вас не требуется.",
+          "align": "left"
+        },
+        { "id": "b-gap-1", "type": "spacer", "size": 24 },
+        {
+          "id": "b-facts",
+          "type": "list",
+          "items": [
+            "Рассмотрение занимает до десяти рабочих дней с даты регистрации заявления.",
+            "Статус заявления виден в личном кабинете — найдите заявление по его номеру.",
+            "О принятом решении мы сообщим отдельным письмом."
+          ]
+        },
+        { "id": "b-gap-2", "type": "spacer", "size": 32 },
+        {
+          "id": "b-cta",
+          "type": "button",
+          "text": "Проверить статус заявления",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-note",
+      "background": "#F4F8FB",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-note",
+          "type": "text",
+          "role": "small",
+          "text": "Номер заявления указан в личном кабинете рядом с датой подачи. Письмо отправлено автоматически, отвечать на него не нужно.",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#FFFFFF",
+      "padding": [24, 24],
+      "blocks": [
+        { "id": "b-footer-rule", "type": "divider" },
+        {
+          "id": "b-footer",
+          "type": "footer",
+          "links": [{ "text": "Отписаться от служебных уведомлений", "href": "{{UNSUBSCRIBE_URL}}" }]
+        }
+      ]
+    }
+  ]
+}

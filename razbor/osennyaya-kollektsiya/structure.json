@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Осенняя коллекция уже в продаже",
+  "preheader": "24 вещи, размеры от 40 до 56 и предзаказная скидка 15% на первую неделю",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [24, 24],
+      "columns": 1,
+      "blocks": [
+        {
+          "id": "b-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/15-logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "Логотип магазина",
+          "href": "{{CTA_URL}}",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-hero",
+      "background": "#FFFFFF",
+      "padding": [0, 32],
+      "columns": 1,
+      "blocks": [
+        {
+          "id": "b-hero-image",
+          "type": "image",
+          "src": "{{ASSETS_BASE}}/15-hero-552x300.png",
+          "width": 552,
+          "height": 300,
+          "alt": "Осенняя коллекция: пальто, тренчи и трикотаж",
+          "href": "{{CTA_URL}}"
+        },
+        {
+          "id": "b-hero-h1",
+          "type": "text",
+          "role": "h1",
+          "align": "left",
+          "text": "Осенняя коллекция уже в продаже"
+        },
+        {
+          "id": "b-hero-lead",
+          "type": "text",
+          "role": "p",
+          "align": "left",
+          "text": "Мы шили её всё лето и наконец можем показать. Двадцать четыре вещи: пальто, тренчи, два вида брюк, трикотаж и три шарфа, которые получились неожиданно удачными."
+        }
+      ]
+    },
+    {
+      "id": "s-tkani",
+      "background": "#FFFFFF",
+      "padding": [0, 32],
+      "columns": 1,
+      "blocks": [
+        {
+          "id": "b-tkani-h2",
+          "type": "text",
+          "role": "h2",
+          "align": "left",
+          "text": "Про ткани"
+        },
+        {
+          "id": "b-tkani-p",
+          "type": "text",
+          "role": "p",
+          "align": "left",
+          "text": "В этом сезоне мы ушли от смесовых тканей почти полностью. Пальто и тренчи — из итальянской шерсти с примесью кашемира, трикотаж — из мериноса, брюки — из плотного хлопка, который не вытягивается на коленях после третьей носки. Каждую ткань мы отстирали и отпарили в лаборатории до того, как отдать в пошив: состав на бирке должен что-то значить."
+        }
+      ]
+    },
+    {
+      "id": "s-razmery",
+      "background": "#FFFFFF",
+      "padding": [0, 32],
+      "columns": 2,
+      "blocks": [
+        {
+          "id": "b-razmery-photo",
+          "type": "image",
+          "column": 1,
+          "src": "{{ASSETS_BASE}}/15-model-264x330.png",
+          "width": 264,
+          "height": 330,
+          "alt": "Модель в вещах осенней коллекции",
+          "href": null
+        },
+        {
+          "id": "b-razmery-h2",
+          "type": "text",
+          "column": 2,
+          "role": "h2",
+          "align": "left",
+          "text": "Про размеры"
+        },
+        {
+          "id": "b-razmery-p",
+          "type": "text",
+          "column": 2,
+          "role": "p",
+          "align": "left",
+          "text": "Мы расширили сетку: теперь от 40 до 56. Это стоило нам двух месяцев работы с лекалами и переделанной посадки на трёх моделях, зато вещи наконец садятся на разные фигуры одинаково хорошо. Если сомневаетесь в размере, напишите в чат — мы подберём по вашим меркам и вышлем две соседние позиции на примерку."
+        }
+      ]
+    },
+    {
+      "id": "s-tseny",
+      "background": "#F5F5F5",
+      "padding": [32, 32],
+      "columns": 1,
+      "blocks": [
+        {
+          "id": "b-tseny-h2",
+          "type": "text",
+          "role": "h2",
+          "align": "left",
+          "text": "Про цены"
+        },
+        {
+          "id": "b-tseny-p",
+          "type": "text",
+          "role": "p",
+          "align": "left",
+          "text": "Цены остались на уровне прошлой осени, хотя ткани подорожали. Первую неделю действует предзаказная скидка 15% по промокоду OSEN15 — она не суммируется с картой постоянного покупателя, зато работает на всю коллекцию, включая пальто."
+        }
+      ]
+    },
+    {
+      "id": "s-cta",
+      "background": "#FFFFFF",
+      "padding": [32, 32],
+      "columns": 1,
+      "blocks": [
+        {
+          "id": "b-dostavka",
+          "type": "text",
+          "role": "p",
+          "align": "left",
+          "text": "Доставка по России бесплатная от 5 000 рублей, примерка перед покупкой — в Москве и Петербурге."
+        },
+        {
+          "id": "b-cta",
+          "type": "button",
+          "primary": true,
+          "align": "center",
+          "text": "Смотреть коллекцию",
+          "href": "{{CTA_URL}}"
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#F5F5F5",
+      "padding": [24, 24],
+      "columns": 1,
+      "blocks": [
+        {
+          "id": "b-footer",
+          "type": "footer",
+          "align": "center",
+          "links": [{ "text": "Отписаться от рассылки", "href": "{{UNSUBSCRIBE_URL}}" }]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Вы записаны на курс «Основы иллюстрации»",
+  "preheader": "Старт через четыре дня: расписание, материалы и анкета на пять минут.",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [24, 8],
+      "blocks": [
+        {
+          "id": "b-header-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/16-logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "Онлайн-школа иллюстрации",
+          "href": null,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-hero",
+      "background": "#FFFFFF",
+      "padding": [16, 0],
+      "blocks": [
+        {
+          "id": "b-hero-image",
+          "type": "image",
+          "src": "{{ASSETS_BASE}}/16-hero-552x276.png",
+          "width": 552,
+          "height": 276,
+          "alt": "Курс «Основы иллюстрации»",
+          "href": null,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-intro",
+      "background": "#FFFFFF",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-intro-h1",
+          "type": "text",
+          "role": "h1",
+          "text": "Вы записаны на курс «Основы иллюстрации»",
+          "align": "left"
+        },
+        {
+          "id": "b-intro-lead",
+          "type": "text",
+          "role": "p",
+          "text": "Здравствуйте! Место за вами закреплено, оплата прошла, и до старта осталось четыре дня. Дальше — коротко о том, как всё устроено, чтобы первое занятие не стало сюрпризом.",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-ustroystvo",
+      "background": "#F5F5F5",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-when-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Когда и где",
+          "align": "left"
+        },
+        {
+          "id": "b-when-text",
+          "type": "text",
+          "role": "p",
+          "text": "Курс идёт восемь недель, занятия по вторникам и четвергам в 19:30 по московскому времени. Живые встречи проходят в Zoom, ссылка приходит за час до начала на этот же адрес. Если пропустили — запись появляется в личном кабинете к утру следующего дня и остаётся доступной год.",
+          "align": "left"
+        },
+        { "id": "b-when-divider", "type": "divider" },
+        {
+          "id": "b-need-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Что понадобится",
+          "align": "left"
+        },
+        {
+          "id": "b-need-text",
+          "type": "text",
+          "role": "p",
+          "text": "Планшет или бумага и любые материалы, которые у вас уже есть, — специально ничего покупать не нужно. К третьей неделе понадобится графический редактор, мы разберём два бесплатных и один платный, выбирать будете сами.",
+          "align": "left"
+        },
+        { "id": "b-need-divider", "type": "divider" },
+        {
+          "id": "b-check-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Как проверяются работы",
+          "align": "left"
+        },
+        {
+          "id": "b-check-text",
+          "type": "text",
+          "role": "p",
+          "text": "После каждой встречи — небольшое задание. Преподаватель разбирает работы лично: не «зачёт», а комментарий по конкретным местам рисунка. Сдавать задания нужно до следующего занятия, но если выбились из графика — напишите куратору, сроки сдвигаем без штрафов.",
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-pervyy-shag",
+      "background": "#FFFFFF",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-step-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Первый шаг",
+          "align": "left"
+        },
+        {
+          "id": "b-step-text",
+          "type": "text",
+          "role": "p",
+          "text": "Загляните в личный кабинет и заполните анкету: что вы уже умеете и чего хотите от курса. Преподаватель читает анкеты до первого занятия и подстраивает разбор под группу. Это займёт пять минут.",
+          "align": "left"
+        },
+        {
+          "id": "b-step-cta",
+          "type": "button",
+          "text": "Открыть личный кабинет",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#FFFFFF",
+      "padding": [8, 24],
+      "blocks": [
+        {
+          "id": "b-footer-curator",
+          "type": "text",
+          "role": "p",
+          "text": "Если что-то непонятно, ответьте на это письмо — куратор читает почту с девяти до девяти.",
+          "align": "left"
+        },
+        { "id": "b-footer-line", "type": "divider" },
+        {
+          "id": "b-footer-legal",
+          "type": "footer",
+          "links": [{ "text": "Отписаться от писем", "href": "{{UNSUBSCRIBE_URL}}" }]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проверить письмо — линтер email-verstka</title>
+<meta name="description" content="Бесплатная проверка HTML письма по ограничениям почтовых клиентов: Outlook, порог Gmail, прехедер, отписка. Сломанное письмо переверстаем и пришлём исправленную версию.">
+<link rel="canonical" href="https://theasapmail.github.io/asapmail-landing/proverka/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="email-verstka">
+<meta property="og:title" content="Проверить письмо — линтер email-verstka"><meta property="og:description" content="Бесплатная проверка HTML письма по ограничениям почтовых клиентов: Outlook, порог Gmail, прехедер, отписка. Сломанное письмо переверстаем и пришлём исправленную версию.">
+<meta property="og:url" content="https://theasapmail.github.io/asapmail-landing/proverka/"><meta property="og:image" content="https://theasapmail.github.io/asapmail-landing/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="../site.css">
+<!-- Яндекс Метрика: впишите номер счётчика вместо YM_ID и раскомментируйте.
+<script type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(YM_ID,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});</script>
+-->
+</head><body><header class="top" data-top><div class="wrap top__in">
+  <a class="logo" href="../"><i aria-hidden="true"></i>email-verstka</a>
+  <nav class="nav" id="nav" aria-label="Разделы"><a href="../#shablony">Готовые письма</a><a href="../#sborka">Сборка из брифа</a><a href="../razbor/">Примеры</a><a href="../proverka/">Проверить письмо</a></nav>
+  <div class="top__right"><a class="ghostlink" href="../en/">EN</a><a class="btn" href="../#beta">Попасть в бету</a><button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav" data-burger><span></span><span></span><span></span></button></div>
+</div></header>
+<main>
+<div class="wrap"><nav class="crumbs" aria-label="Хлебные крошки"><a href="../">Главная</a><span>/</span>Проверить письмо</nav></div>
+<section class="wrap" style="padding-top:22px;padding-bottom:clamp(32px,5vw,48px)">
+  <p class="kicker">Бесплатно · проверка в браузере — код никуда не уходит</p>
+  <h1 class="h1">Проверьте письмо — покажем, где оно сломается</h1>
+  <p class="lead">Вставьте HTML — линтер проверит его по ограничениям почтовых клиентов: вес для Gmail, прехедер, ссылка отписки, плейсхолдеры, теги, атрибуты и CSS вне белого списка. Проверка считается у вас в браузере, код письма никуда не уходит. Если письмо сломано — оставьте почту под отчётом: переверстаем по нашей базе и пришлём исправленную версию.</p>
+</section>
+<section class="wrap lintform">
+  <div class="lintform__in">
+    <label for="src" class="lintform__label">HTML письма</label>
+    <textarea id="src" class="lintform__ta" spellcheck="false" placeholder="&lt;!doctype html&gt;&#10;&lt;html&gt;…" data-src></textarea>
+    <div class="lintform__row"><button class="btn btn--lg" type="button" data-run>Проверить</button><button class="btn btn--ghost" type="button" data-sample>Вставить наш пример</button><span class="lintform__hint" data-hint></span></div>
+  </div>
+  <div class="lintform__out" data-out hidden>
+    <div class="lintres__head"><span class="verdict" data-verdict></span><span class="lintres__bytes" data-bytes></span></div>
+    <div data-groups></div>
+    <form class="fixform" data-fix action="" method="post" hidden>
+      <!-- Приёмника форм пока нет: подставьте action (Formspree, свой эндпоинт) — тот же, что нужен бета-форме главной. -->
+      <h3 class="fixform__h">Починим это письмо</h3>
+      <p class="fixform__p">Переверстаем по нашей базе и пришлём на почту исправленную версию — «было/стало», бесплатно, пока идёт бета.</p>
+      <div class="fixform__row">
+        <input class="fixform__input" name="email" type="email" inputmode="email" autocomplete="email" placeholder="почта@компания.ру" aria-label="Рабочая почта" required>
+        <button class="btn btn--lg" type="submit">Починить письмо</button>
+      </div>
+      <textarea name="html" data-fix-html hidden></textarea>
+      <input type="hidden" name="codes" data-fix-codes>
+      <p class="fixform__note">Нажимая «Починить письмо», вы отправляете нам HTML этого письма и свою почту — только чтобы вернуть исправленную версию.</p>
+      <p class="fixform__done" role="status" hidden>Приняли. Починенная версия придёт на эту почту.</p>
+    </form>
+    <div data-check></div>
+    <p class="sub" style="margin-top:18px">Поломки сгруппированы по последствиям; таблицы с кодами линтера (<b style="color:var(--red)">✗</b> — ошибки, <b style="color:var(--warn)">!</b> — предупреждения) — внутри каждой группы, коды совпадают с отчётами в карточках примеров. <code>css-check</code> — правила, ещё не подтверждённые во всех клиентах: их мы перечисляем, а не прячем.</p>
+  </div>
+</section>
+<section class="section"><div class="wrap split">
+  <div><h2 class="h2">Что проверяется</h2></div>
+  <ul class="results">
+    <li>вес письма: предупреждение от 90 КБ, ошибка от 102 КБ — порог, на котором Gmail обрезает письмо</li>
+    <li>прехедер, ссылка отписки, пустые <code>href</code>, плейсхолдеры вне семейства <code>{{CTA_URL}}</code> / <code>{{LINK_URL_n}}</code></li>
+    <li>теги, атрибуты и CSS-свойства по белому списку — то, что переживает Outlook</li>
+    <li>обязательные атрибуты таблиц и картинок, запрещённые теги и конструкции</li>
+  </ul>
+</div></section>
+</main>
+<section class="cta section--alt"><div class="wrap"><h2 class="h2">Хотите такое же письмо под свой бренд?</h2><p>Бета открыта для первых 20 команд — бесплатно, на ваших брифах.</p><a class="btn btn--lg" href="../#beta">Попасть в бету</a></div></section><footer class="foot">
+  <div class="wrap">
+    <div class="foot__cols">
+      <div>
+        <h4>О продукте</h4>
+        <ul>
+          <li><a href="../#sborka">Как работает</a></li>
+          <li><a href="../proverka/">Проверить своё письмо</a></li>
+          <li><a href="../szhatie-html/">Сжать HTML</a></li>
+          <li><a href="../szhatie-css/">Сжать CSS</a></li>
+          <li><a href="../knopka-dlya-pisma/">Кнопка для письма</a></li>
+          <li><a href="../prevyu-vhodyashchih/">Превью входящих</a></li>
+          <li><a href="../#faq">Вопросы</a></li>
+          <li><a href="../en/" lang="en">English</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Сервис</h4>
+        <ul>
+          <li><a href="../#sborka">Сборка из брифа</a></li>
+          <li><a href="../#nadyozhno">Бренд с сайта</a></li>
+          <li><a href="../#faq">Правки словами</a></li>
+          <li><a href="../#tarify">Тарифы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Готовые письма</h4>
+        <ul>
+          <li><a href="../razbor/welcome-posle-registratsii/">Welcome: после регистрации</a></li>
+          <li><a href="../razbor/welcome-kurs-osnovy-illyustratsii/">Welcome: запись на курс</a></li>
+          <li><a href="../razbor/zakaz-prinyat/">Заказ принят</a></li>
+          <li><a href="../razbor/promo-rasprodazha-avgust/">Промо: скидка на каталог</a></li>
+          <li><a href="../razbor/osennyaya-kollektsiya/">Промо: осенняя коллекция</a></li>
+          <li><a href="../razbor/daydzhest-avgusta/">Дайджест месяца</a></li>
+          <li><a href="../razbor/anons-vebinara-email-marketing/">Анонс вебинара</a></li>
+          <li><a href="../razbor/govuk-uvedomlenie/">Уведомление о заявлении</a></li>
+          <li><a href="../razbor/wikipedia-ezhegodnyy-sbor/">Сбор пожертвований</a></li>
+          <li><a class="more more--muted" href="../razbor/">Все примеры</a></li>
+        </ul>
+      </div>
+      <div class="foot__box">
+        <h4>Бета открыта</h4>
+        <p>Первые 20 команд собирают письма бесплатно и получают тариф ниже публичного после запуска.</p>
+        <a class="btn btn--block" href="../#beta">Попасть в бету</a>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 email-verstka · ASAP Mail. Все права защищены. Сайт обновляется автоматически из основного репозитория.</span>
+      <span><a href="#">Условия использования</a><a href="#">Конфиденциальность</a></span>
+    </div>
+  </div>
+</footer>
+<script src="lint.js?v=3c050337"></script>
+<script>
+(function(){
+/* Словарь болей: код линтера -> группа с объяснением последствий. Код без группы попадает в «Прочее». */
+var PAIN=[
+{key:'outlook',title:'Outlook сломает раскладку',codes:['tag-unknown','tag-forbidden','tag-document','attr-not-allowed','css-not-allowed','table-attrs','class-unknown','tag-conditional','css-conditional'],blurb:'Outlook на Windows рендерит письма движком Word: современных тегов и CSS он не знает. Разметка вне белого списка у части подписчиков молча пропадёт или разъедется.'},
+{key:'gmail',title:'Gmail обрежет письмо',codes:['size-limit','size-warn'],blurb:'Gmail показывает первые 102 КБ HTML, дальше — ссылка «Показать письмо целиком». Низ письма вместе с отпиской до многих подписчиков не доедет.'},
+{key:'degrade',title:'Развалится без картинок и стилей',codes:['img-attrs','spacer-nbsp'],blurb:'Почтовые клиенты блокируют картинки и могут вырезать блок стилей. Без страховочных атрибутов письмо в этом режиме теряет отступы, подписи и структуру.'},
+{key:'hygiene',title:'Гигиена рассылки',codes:['preheader-missing','unsubscribe-missing','href-empty','href-bad','placeholder-unknown'],blurb:'Прехедер, отписка и рабочие ссылки. Без ссылки отписки растут жалобы на спам, пустой href — битый клик, а текст в превью инбокса должны выбирать вы, а не случайный кусок вёрстки.'}
+];
+var OTHER={title:'Прочее',blurb:'Находки, для которых у нас нет перевода на язык последствий, — читайте сообщения линтера в деталях.'};
+var src=document.querySelector('[data-src]'),out=document.querySelector('[data-out]'),hint=document.querySelector('[data-hint]'),fix=document.querySelector('[data-fix]');
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function plural(n,a,b,c){var m10=n%10,m100=n%100;if(m10===1&&m100!==11)return a;if(m10>=2&&m10<=4&&(m100<12||m100>14))return b;return c}
+function table(title,rows,mark){if(!rows.length)return '';return '<h3 class="lintres__h">'+title+' <span>'+rows.length+'</span></h3><div class="tablewrap"><table class="tbl"><thead><tr><th>Где</th><th>Строка</th><th>Код</th><th>Сообщение</th></tr></thead><tbody>'+rows.map(function(f){return '<tr><td>'+esc(f.where)+'</td><td>'+(f.line||'—')+'</td><td><code>'+mark+' '+esc(f.code)+'</code></td><td>'+esc(f.message)+'</td></tr>'}).join('')+'</tbody></table></div>'}
+function takeBy(list,codes){var t=[];for(var i=list.length-1;i>=0;i--)if(codes.indexOf(list[i].code)>=0)t.unshift(list.splice(i,1)[0]);return t}
+function card(g,errors,warns){var badge=errors.length?errors.length+' '+plural(errors.length,'поломка','поломки','поломок'):warns.length+' '+plural(warns.length,'предупреждение','предупреждения','предупреждений');
+return '<div class="paincard'+(errors.length?' paincard--bad':'')+'"><div class="paincard__head"><h3>'+esc(g.title)+'</h3><span>'+badge+'</span></div><p class="paincard__blurb">'+esc(g.blurb)+'</p><details><summary>Технические детали</summary>'+table('Ошибки',errors,'✗')+table('Предупреждения',warns,'!')+'</details></div>'}
+function run(){var html=src.value;if(!html.trim()){hint.textContent='Вставьте HTML письма.';return}hint.textContent='';var r=window.emailVerstkaLint(html);out.hidden=false;
+var rest={errors:r.errors.slice(),warns:r.warns.slice()},cards='',broken=0;
+PAIN.forEach(function(g){var e=takeBy(rest.errors,g.codes),w=takeBy(rest.warns,g.codes);if(e.length||w.length){cards+=card(g,e,w);if(e.length)broken++}});
+if(rest.errors.length||rest.warns.length){cards+=card(OTHER,rest.errors,rest.warns);if(rest.errors.length)broken++}
+var v=document.querySelector('[data-verdict]');
+v.textContent=r.ok?'✅ Каркас в порядке — поломок линтер не нашёл':'⚠ Это письмо сломается в '+broken+' '+plural(broken,'месте','местах','местах');
+v.className='verdict '+(r.ok?'ok':'bad');
+document.querySelector('[data-bytes]').textContent='вес '+r.bytes.toLocaleString('ru-RU')+' байт';
+document.querySelector('[data-groups]').innerHTML=cards;
+var c=document.querySelector('[data-check]');c.innerHTML=r.checkTotal?('<h3 class="lintres__h">Неподтверждённые правила (css-check) <span>'+r.checkTotal+'</span></h3><div class="codes">'+r.check.map(function(x){return '<span>'+esc(x[0])+' <b>×'+x[1]+'</b></span>'}).join('')+'</div>'):'';
+if(r.sectionError)c.innerHTML+='<p class="sub">Тело письма не разобрано: '+esc(r.sectionError)+'</p>';
+if(fix){fix.hidden=!r.errors.length;fix.querySelector('[data-fix-html]').value=html;fix.querySelector('[data-fix-codes]').value=r.errors.map(function(f){return f.code}).join(' ');fix.querySelector('.fixform__done').hidden=true}
+out.scrollIntoView({behavior:'smooth',block:'start'})}
+document.querySelector('[data-run]').addEventListener('click',run);
+document.querySelector('[data-sample]').addEventListener('click',function(){hint.textContent='Загружаю…';fetch('../razbor/welcome-posle-registratsii/email.src.html').then(function(r){return r.text()}).then(function(t){src.value=t;hint.textContent='Это письмо из примера «Добро пожаловать! Остался один шаг».';run()}).catch(function(){hint.textContent='Не удалось загрузить пример.'})});
+src.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='Enter')run()});
+/* Приёмника форм пока нет (как у бета-формы главной): пустой action — показываем состояние, не отправляем. Появится action — уберите. */
+if(fix)fix.addEventListener('submit',function(e){if(!fix.getAttribute('action')){e.preventDefault();fix.querySelector('.fixform__done').hidden=false}});
+})();
+</script>
+<script>(function(){var b=document.querySelector('[data-burger]'),n=document.getElementById('nav');if(!b||!n)return;b.addEventListener('click',function(){var o=n.classList.toggle('is-open');b.setAttribute('aria-expanded',String(o));document.body.classList.toggle('nav-open',o)});n.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('is-open');b.setAttribute('aria-expanded','false');document.body.classList.remove('nav-open')}})})();</script></body></html>

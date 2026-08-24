@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Заказ № A-104857 принят",
+  "preheader": "Сумма 18 870 ₽, доставим 27 августа с 10:00 до 18:00",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-header-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "Логотип магазина",
+          "href": null,
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-zakaz",
+      "background": "#FFFFFF",
+      "padding": [8, 32],
+      "blocks": [
+        {
+          "id": "b-zakaz-h1",
+          "type": "text",
+          "role": "h1",
+          "align": "left",
+          "text": "Заказ № A-104857 принят"
+        },
+        {
+          "id": "b-zakaz-lead",
+          "type": "text",
+          "role": "p",
+          "align": "left",
+          "text": "Мы получили заказ и передали его на сборку. Ниже — что в нём, на какую сумму и когда привезём."
+        },
+        {
+          "id": "b-zakaz-summa",
+          "type": "text",
+          "role": "h2",
+          "align": "left",
+          "text": "Сумма: 18 870 ₽"
+        },
+        {
+          "id": "b-zakaz-srok",
+          "type": "text",
+          "role": "p",
+          "align": "left",
+          "text": "Доставим 27 августа, с 10:00 до 18:00"
+        },
+        {
+          "id": "b-zakaz-cta",
+          "type": "button",
+          "text": "Посмотреть заказ",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "left"
+        }
+      ]
+    },
+    {
+      "id": "s-sostav",
+      "background": "#F5F5F5",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-sostav-h2",
+          "type": "text",
+          "role": "h2",
+          "align": "left",
+          "text": "Что в заказе"
+        },
+        {
+          "id": "b-sostav-list",
+          "type": "list",
+          "items": [
+            "Кроссовки для бега, размер 42 — 12 990 ₽",
+            "Носки спортивные, 3 пары — 890 ₽",
+            "Рюкзак городской, 20 л — 4 590 ₽",
+            "Доставка курьером — 400 ₽"
+          ]
+        },
+        { "id": "b-sostav-divider", "type": "divider" },
+        {
+          "id": "b-sostav-itogo",
+          "type": "text",
+          "role": "p",
+          "align": "left",
+          "text": "Итого: 18 870 ₽"
+        }
+      ]
+    },
+    {
+      "id": "s-dostavka",
+      "background": "#FFFFFF",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-dostavka-h2",
+          "type": "text",
+          "role": "h2",
+          "align": "left",
+          "text": "Доставка"
+        },
+        {
+          "id": "b-dostavka-list",
+          "type": "list",
+          "items": [
+            "Когда — 27 августа, с 10:00 до 18:00",
+            "Как — курьер, позвонит за час до приезда",
+            "Куда — Москва, улица Лесная, 12, квартира 5",
+            "Оплата — картой онлайн, заказ оплачен"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#F5F5F5",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-footer-note",
+          "type": "text",
+          "role": "small",
+          "align": "center",
+          "text": "Это служебное письмо о заказе A-104857."
+        },
+        {
+          "id": "b-footer-links",
+          "type": "footer",
+          "links": [{ "text": "Отписаться", "href": "{{UNSUBSCRIBE_URL}}" }]
+        }
+      ]
+    }
+  ]
+}

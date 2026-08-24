@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Википедия живёт без рекламы — её держат читатели",
+  "preheader": "Ежегодный сбор: средний взнос небольшой, а поддержать можно за минуту",
+  "brand": { "$ref": "brand.json" },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-header-logo",
+          "type": "logo",
+          "src": "https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png",
+          "width": 200,
+          "height": 183,
+          "alt": "Википедия",
+          "href": "https://www.wikipedia.org",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-hero",
+      "background": "#FFFFFF",
+      "padding": [0, 32],
+      "blocks": [
+        {
+          "id": "b-hero-h1",
+          "type": "text",
+          "role": "h1",
+          "text": "Википедия живёт без рекламы",
+          "align": "center"
+        },
+        {
+          "id": "b-hero-lead",
+          "type": "text",
+          "role": "p",
+          "text": "У энциклопедии нет ни баннеров, ни платной подписки, ни владельца, который оплачивал бы счета. Её держат читатели: раз в год мы просим тех, кто ей пользуется, поддержать её взносом.",
+          "align": "center"
+        },
+        {
+          "id": "b-hero-cta",
+          "type": "button",
+          "text": "Поддержать Википедию",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-kuda",
+      "background": "#FFFFFF",
+      "padding": [8, 32],
+      "blocks": [
+        {
+          "id": "b-kuda-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Куда идут деньги",
+          "align": "left"
+        },
+        {
+          "id": "b-kuda-list",
+          "type": "list",
+          "items": [
+            "Серверы и трафик: статьи открываются одинаково быстро в любой точке мира и в любой час.",
+            "Разработка и защита: редактор, поиск, мобильные приложения, а ещё резервные копии и работа без сбоев.",
+            "Сохранность знания: поддержка тех, кто пишет и проверяет статьи, и хранение архива на годы вперёд."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s-vznos",
+      "background": "#F5F5F5",
+      "padding": [32, 32],
+      "blocks": [
+        {
+          "id": "b-vznos-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Это займёт минуту",
+          "align": "center"
+        },
+        {
+          "id": "b-vznos-text",
+          "type": "text",
+          "role": "p",
+          "text": "Средний взнос небольшой — Википедию держит не размер суммы, а число читателей, которые её вносят. Если каждый, кто читает эту страницу, добавит немного, сбор закончится, и мы вернёмся к тому, ради чего всё затевалось: к статьям.",
+          "align": "center"
+        },
+        {
+          "id": "b-vznos-note",
+          "type": "text",
+          "role": "small",
+          "text": "Поддержать можно любой удобной суммой, разово или раз в месяц.",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#F5F5F5",
+      "padding": [24, 24],
+      "blocks": [
+        {
+          "id": "b-footer-main",
+          "type": "footer",
+          "links": [
+            { "text": "Отписаться от рассылки", "href": "{{UNSUBSCRIBE_URL}}" }
+          ]
+        }
+      ]
+    }
+  ]
+}

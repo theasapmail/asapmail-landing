@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>email-verstka — describe the email in words, it arrives intact</title>
+<meta name="description" content="email-verstka turns a brief, copy or a mockup screenshot into an HTML email that survives Outlook, Gmail and dark mode, and checks it with a linter. Beta is open.">
+<link rel="canonical" href="https://theasapmail.github.io/asapmail-landing/en/">
+<link rel="alternate" hreflang="ru" href="https://theasapmail.github.io/asapmail-landing/">
+<link rel="alternate" hreflang="en" href="https://theasapmail.github.io/asapmail-landing/en/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="email-verstka">
+<meta property="og:title" content="email-verstka — describe the email in words, it arrives intact">
+<meta property="og:description" content="HTML emails from a brief, built by the rules of email clients and checked by a linter. Outlook, Gmail, dark mode. Beta is open.">
+<meta property="og:url" content="https://theasapmail.github.io/asapmail-landing/en/"><meta property="og:image" content="https://theasapmail.github.io/asapmail-landing/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0B10;
+    --bg-2: #0F1118;
+    --card: #15171F;
+    --card-2: #1B1E28;
+    --line: #262A36;
+    --line-2: #333846;
+    --text: #F2F4F8;
+    --muted: #A3AAB8;
+    --dim: #6F7787;
+    --blue: #3B6BFF;
+    --blue-2: #2F57D9;
+    --purple: #8B5CF6;
+    --red: #EF4A5A;
+    --green: #22B573;
+    --orange: #F28C28;
+    --teal: #14B8A6;
+    --ok: #8FD3AE;
+    --warn: #F2C46D;
+
+    --body: "Golos Text", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+    --letter: Arial, Helvetica, sans-serif;
+    --max: 1180px;
+    --gutter: clamp(20px, 4vw, 48px);
+    --r: 14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--body); font-size: 16px; line-height: 1.55; overflow-x: clip;
+    background-image:
+      radial-gradient(900px 500px at 80% -10%, rgba(59,107,255,.16), transparent 60%),
+      radial-gradient(700px 500px at 0% 20%, rgba(139,92,246,.10), transparent 60%);
+    background-repeat: no-repeat;
+  }
+  a { color: inherit; }
+  h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  button, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); min-width: 0; }
+  main, section, .grid > *, .side > *, .proc > * { min-width: 0; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 46px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--blue); color: #fff; font-weight: 600; font-size: 15px; text-decoration: none;
+    cursor: pointer; white-space: nowrap; transition: background .15s, transform .15s;
+  }
+  .btn:hover { background: var(--blue-2); transform: translateY(-1px); }
+  .btn--ghost { background: transparent; border: 1px solid var(--line-2); color: var(--text); }
+  .btn--ghost:hover { background: var(--card); border-color: #475065; }
+  .btn--lg { height: 54px; padding: 0 24px; font-size: 16px; }
+  .btn--block { width: 100%; }
+  .more { display: inline-flex; align-items: center; gap: 6px; color: var(--text); text-decoration: none; font-weight: 500; font-size: 15px; }
+  .more::after { content: "→"; transition: transform .2s; }
+  .more:hover::after { transform: translateX(3px); }
+  .more--muted { color: var(--muted); }
+
+  /* ─── Шапка ─── */
+  .top { position: sticky; top: 0; z-index: 50; background: rgba(10,11,16,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+  .top.is-scrolled { border-color: var(--line); }
+  .top__in { display: flex; align-items: center; gap: 28px; height: 64px; }
+  .logo { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; text-decoration: none; display: inline-flex; align-items: center; gap: 9px; }
+  .logo i { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(34,181,115,.2); }
+  .nav { display: flex; gap: 22px; font-size: 14.5px; color: var(--muted); }
+  .nav a { text-decoration: none; transition: color .15s; }
+  .nav a:hover { color: var(--text); }
+  .top__right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .top__right .ghostlink { font-size: 14.5px; color: var(--muted); text-decoration: none; }
+  .top__right .ghostlink:hover { color: var(--text); }
+  .burger { display: none; width: 42px; height: 42px; border: 1px solid var(--line-2); border-radius: 10px; background: transparent; cursor: pointer; padding: 0; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+  .burger span { display: block; width: 18px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .2s, opacity .2s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ─── Хиро ─── */
+  .hero { padding-top: clamp(48px, 7vw, 96px); padding-bottom: clamp(40px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero__title { font-weight: 700; font-size: clamp(34px, 4.2vw, 56px); line-height: 1.05; letter-spacing: -0.03em; text-wrap: balance; }
+  .hero__title em { font-style: normal; color: var(--ok); }
+  .hero__lead { margin-top: 20px; color: var(--muted); font-size: clamp(16px, 1.3vw, 18px); max-width: 46ch; }
+  .hero__dirs { margin-top: 36px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .dir__t { font-weight: 600; font-size: 16.5px; }
+  .dir__d { color: var(--muted); font-size: 14.5px; margin-top: 6px; line-height: 1.5; }
+  .dir .more { margin-top: 10px; font-size: 14px; }
+  .hero__actions { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* демо-сборка */
+  .demo { position: relative; }
+  .prompt { background: var(--card); border: 1px solid var(--line); border-radius: var(--r) var(--r) 0 0; padding: 12px 14px 10px; font-family: var(--mono); font-size: 12.5px; line-height: 1.55; min-height: 84px; }
+  .prompt__who { color: var(--dim); font-size: 11px; margin-bottom: 5px; display: flex; justify-content: space-between; }
+  .prompt__who button { border: 0; background: none; color: var(--muted); font: inherit; cursor: pointer; padding: 0; }
+  .prompt__who button:hover { color: var(--text); }
+  .prompt__text { white-space: pre-wrap; color: var(--text); }
+  .prompt__caret { display: inline-block; width: 7px; height: 14px; background: var(--text); vertical-align: -2px; margin-left: 1px; animation: blink 1s steps(1) infinite; }
+  .prompt__caret.is-off { display: none; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .stages { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; background: #070910; padding: 9px 12px; border: 1px solid var(--line); border-top: 0; border-bottom: 0; font-family: var(--mono); font-size: 10.5px; color: var(--dim); }
+  .stage { display: flex; flex-direction: column; gap: 5px; min-width: 0; white-space: nowrap; overflow: hidden; transition: color .3s; }
+  .stage__bar { height: 3px; border-radius: 2px; background: var(--line); position: relative; overflow: hidden; }
+  .stage__bar::after { content: ""; position: absolute; inset: 0; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(.3,.7,.2,1); }
+  .stage.is-on { color: var(--text); }
+  .stage.is-on .stage__bar::after { transform: scaleX(1); }
+  .stage.is-done { color: var(--ok); }
+  .stage.is-done .stage__bar::after { background: var(--green); }
+  .client { border-radius: 0 0 var(--r) var(--r); overflow: hidden; background: #E9EEF4; border: 1px solid var(--line); box-shadow: 0 40px 80px -40px rgba(0,0,0,.8); transition: background .35s; }
+  .client__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 10px 14px; background: #fff; border-bottom: 1px solid #D7DEE6; color: #0F1C2B; transition: background .35s, color .35s, border-color .35s; }
+  .client__meta { min-width: 0; flex: 1 1 200px; }
+  .client__subject { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 20px; }
+  .client__from { font-size: 12px; color: #4A5767; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .35s; }
+  .theme { display: inline-flex; padding: 2px; border-radius: 999px; background: #E9EEF4; border: 1px solid #D7DEE6; flex-shrink: 0; transition: background .35s, border-color .35s; }
+  .theme__btn { border: 0; background: transparent; border-radius: 999px; padding: 5px 10px; font-size: 12px; font-weight: 500; color: #4A5767; cursor: pointer; transition: background .2s, color .2s; }
+  .theme__btn[aria-pressed="true"] { background: #0F1C2B; color: #fff; }
+  .client__body { padding: clamp(12px, 2.5vw, 22px) clamp(10px, 2vw, 20px); position: relative; }
+  .client.is-dark { background: #1B1F24; }
+  .client.is-dark .client__bar { background: #272D35; border-color: #333A44; color: #D5DAE1; }
+  .client.is-dark .client__from { color: #8B94A0; }
+  .client.is-dark .theme { background: #1B1F24; border-color: #3A424D; }
+  .client.is-dark .theme__btn { color: #8B94A0; }
+  .client.is-dark .theme__btn[aria-pressed="true"] { background: #D5DAE1; color: #1B1F24; }
+  .letter { width: 100%; max-width: 600px; margin: 0 auto; background: #fff; color: #111; font-family: var(--letter); font-size: 14px; line-height: 1.5; min-height: 100px; }
+  .letter__sec { padding: 18px 24px; transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.2,1); }
+  .letter__sec--tight { padding: 16px 8px; }
+  .letter__sec--grey { background: #F5F5F5; }
+  .letter__sec--hero { padding: 10px 0; }
+  .letter__logo, .letter__img { display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(135deg, #EEF1F5 0 8px, #E3E8EE 8px 16px); color: #5E6B7A; font-family: var(--mono); font-size: 10px; border: 1px dashed #C5CDD6; }
+  .letter__logo { width: 150px; height: 44px; margin: 0 auto; }
+  .letter__img { width: 100%; aspect-ratio: 600 / 200; }
+  .letter h2 { font-size: 21px; line-height: 1.25; margin: 0 0 10px; font-weight: 700; }
+  .letter h3 { font-size: 16px; margin: 0 0 8px; font-weight: 700; }
+  .letter p { margin: 0 0 10px; }
+  .letter p:last-child { margin-bottom: 0; }
+  .letter__btn { display: inline-block; background: #0052CC; color: #fff !important; text-decoration: none; font-weight: 700; padding: 11px 22px; border-radius: 4px; font-size: 14px; line-height: 1; }
+  .letter__center { text-align: center; padding-top: 4px; }
+  .letter ol { list-style: decimal; padding-left: 20px; margin: 0 0 8px; }
+  .letter ol li { margin-bottom: 4px; }
+  .letter small { font-size: 12px; color: #666; display: block; }
+  .letter__foot { font-size: 11px; color: #666; text-align: center; line-height: 1.6; border-top: 1px solid #DDD; padding-top: 12px; }
+  .letter__foot a { color: #666; }
+  .demo.is-building .letter__sec { opacity: 0; transform: translateY(12px); }
+  .demo.is-building .letter__sec.is-in { opacity: 1; transform: none; }
+  .verdict-pop { position: absolute; right: clamp(10px, 2vw, 20px); bottom: clamp(12px, 2.5vw, 22px); z-index: 2; font-family: var(--mono); font-size: 12px; padding: 7px 11px; border-radius: 8px; background: var(--green); color: #fff; box-shadow: 0 10px 24px -10px rgba(34,181,115,.6); opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s; }
+  .verdict-pop.is-on { opacity: 1; transform: none; }
+
+  /* ─── Секции ─── */
+  .section { padding: clamp(56px, 8vw, 104px) 0; }
+  .section--alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .h2 { font-weight: 700; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.1; letter-spacing: -0.025em; text-wrap: balance; }
+  .h2--center { text-align: center; margin-left: auto; margin-right: auto; max-width: 24ch; }
+  .lead { margin-top: 16px; color: var(--muted); font-size: clamp(15.5px, 1.2vw, 17.5px); text-wrap: pretty; }
+  .lead--center { text-align: center; max-width: 56ch; margin-left: auto; margin-right: auto; }
+  .kicker { font-size: 14px; color: var(--muted); margin-bottom: 12px; font-weight: 500; }
+  .side { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+  .side__l .more { margin-top: 18px; }
+  .grid { display: grid; gap: 16px; }
+  .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mt { margin-top: clamp(28px, 4vw, 48px); }
+
+  /* плитка-иконка */
+  .tile { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; color: #fff; flex-shrink: 0; }
+  .tile svg { width: 22px; height: 22px; }
+  .tile--blue { background: var(--blue); } .tile--purple { background: var(--purple); } .tile--red { background: var(--red); }
+  .tile--green { background: var(--green); } .tile--orange { background: var(--orange); } .tile--teal { background: var(--teal); }
+  .feat { display: grid; gap: 14px; align-content: start; }
+  .feat__t { font-weight: 600; font-size: 17px; }
+  .feat__d { color: var(--muted); font-size: 15px; line-height: 1.55; margin-top: 4px; }
+  .feat__d code { font-family: var(--mono); font-size: 13px; color: var(--text); }
+  .feat__ex { font-family: var(--mono); font-size: 12px; color: var(--dim); margin-top: 8px; }
+  .feat__ex b { color: var(--muted); font-weight: 500; }
+  .feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 40px; }
+
+  /* полоса клиентов */
+  .strip { padding: 34px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .strip__cap { text-align: center; font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+  .strip__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 36px; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; color: #C8CEDA; }
+  .strip__row span { display: inline-flex; align-items: center; gap: 9px; }
+  .strip__row i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  /* готовые письма */
+  .list-b li { position: relative; padding-left: 16px; color: var(--muted); font-size: 15px; margin-top: 8px; }
+  .list-b li::before { content: ""; position: absolute; left: 0; top: 10px; width: 5px; height: 5px; border-radius: 50%; background: var(--muted); }
+  .tpl { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; display: grid; gap: 14px; transition: transform .25s, border-color .25s; }
+  .tpl:hover { transform: translateY(-3px); border-color: var(--line-2); }
+  .tpl__t { font-weight: 600; font-size: 16.5px; }
+  .tpl__shot { background: #E9EEF4; border-radius: 12px; padding: 16px; height: 260px; overflow: hidden; position: relative; }
+  .tpl__shot--img { display: block; padding: 14px 14px 0; }
+  .tpl__shot--img img { display: block; width: 100%; height: auto; border-radius: 6px 6px 0 0; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  .tpl__shot::after, .case__shot::after { content: ""; position: absolute; inset: auto 0 0; height: 70px; background: linear-gradient(transparent, #E9EEF4); }
+  .mini-letter { width: 100%; max-width: 300px; margin: 0 auto; background: #fff; color: #111; font-family: var(--letter); font-size: 9px; line-height: 1.4; }
+  .mini-letter > div { padding: 10px 12px; }
+  .mini-letter .g { background: #F5F5F5; }
+  .mini-letter .lg { width: 70px; height: 20px; margin: 0 auto; background: repeating-linear-gradient(135deg, #EEF1F5 0 5px, #E3E8EE 5px 10px); border: 1px dashed #C5CDD6; }
+  .mini-letter .im { width: 100%; height: 54px; background: repeating-linear-gradient(135deg, #EEF1F5 0 5px, #E3E8EE 5px 10px); border: 1px dashed #C5CDD6; }
+  .mini-letter .im-wrap { padding: 0; }
+  .mini-letter h4 { font-size: 13px; margin: 0 0 5px; font-weight: 700; }
+  .mini-letter h5 { font-size: 11px; margin: 0 0 4px; font-weight: 700; }
+  .mini-letter p { margin: 0 0 5px; }
+  .mini-letter .b { display: inline-block; background: #0052CC; color: #fff; padding: 6px 12px; border-radius: 3px; font-weight: 700; font-size: 9px; }
+  .mini-letter .c { text-align: center; }
+  .mini-letter table { width: 100%; border-collapse: collapse; }
+  .mini-letter td { padding: 3px 0; border-bottom: 1px solid #E3E8EE; }
+  .mini-letter td + td { text-align: right; }
+  .mini-letter .tot td { font-weight: 700; border-bottom: 0; }
+  .mini-letter .big { font-size: 20px; font-weight: 700; color: #0052CC; }
+  .mini-letter .code { display: inline-block; background: #FFF3C4; padding: 2px 6px; border-radius: 2px; font-weight: 700; }
+  .tpl__meta { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14px; color: var(--muted); }
+  .tpl__price { font-weight: 700; font-size: 20px; color: var(--text); white-space: nowrap; }
+  .tpl__price small { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .tpl__tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag { font-family: var(--mono); font-size: 11.5px; color: var(--muted); background: var(--card-2); border: 1px solid var(--line); padding: 3px 8px; border-radius: 6px; }
+
+  /* процесс */
+  .proc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .steps { margin-top: clamp(36px, 5vw, 56px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; position: relative; }
+  .steps::before { content: ""; position: absolute; left: 12px; right: 12px; top: 11px; height: 2px; background: var(--line); }
+  .step { position: relative; padding-top: 38px; }
+  .step__n { position: absolute; top: 0; left: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 12px; font-weight: 700; display: grid; place-items: center; box-shadow: 0 0 0 6px var(--bg-2); }
+  .step:last-child .step__n { background: var(--green); }
+  .step__t { font-weight: 600; font-size: 16.5px; }
+  .step__d { color: var(--muted); font-size: 14.5px; margin-top: 6px; }
+  .step__out { margin-top: 12px; font-size: 13px; color: var(--dim); }
+  .step__out b { color: var(--muted); font-weight: 500; display: block; }
+  .step__out code { font-family: var(--mono); font-size: 12.5px; color: var(--text); }
+  .term { background: #070910; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; font-family: var(--mono); font-size: 12.5px; line-height: 1.7; box-shadow: 0 40px 80px -40px rgba(0,0,0,.8); }
+  .term__bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: var(--card); border-bottom: 1px solid var(--line); color: var(--dim); font-size: 11.5px; }
+  .term__bar i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .term__bar i:nth-child(1) { background: #FF5F57; } .term__bar i:nth-child(2) { background: #FEBC2E; } .term__bar i:nth-child(3) { background: #28C840; }
+  .term__bar span { margin-left: 6px; }
+  .term__body { padding: 14px 16px; min-height: 270px; color: #C9D5E3; }
+  .term__line { opacity: 0; transform: translateY(4px); transition: opacity .25s, transform .25s; white-space: pre-wrap; word-break: break-word; }
+  .term__line.is-in { opacity: 1; transform: none; }
+  .term .c { color: var(--dim); } .term .ok { color: var(--ok); } .term .warn { color: var(--warn); } .term .cmd { color: #fff; } .term .cmd::before { content: "$ "; color: var(--dim); }
+  .term .big { color: #fff; background: var(--green); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-top: 6px; }
+
+  /* кейсы */
+  .case { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: transform .25s, border-color .25s; }
+  .case:hover { transform: translateY(-3px); border-color: var(--line-2); }
+  .case__shot { background: #E9EEF4; padding: 18px 18px 0; overflow: hidden; position: relative; min-height: 240px; }
+  .case__shot .mini-letter { max-width: 100%; }
+  .case__shot--img { display: block; padding: 16px 16px 0; }
+  .case__shot--img img { display: block; width: 100%; height: auto; border-radius: 6px 6px 0 0; box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  .case__body { padding: 22px; display: grid; align-content: space-between; gap: 18px; }
+  .case__t { font-weight: 600; font-size: 17px; line-height: 1.35; }
+  .case__m { font-family: var(--mono); font-size: 12px; color: var(--dim); margin-top: 10px; }
+  .case__m b { color: var(--ok); font-weight: 500; }
+
+  /* тарифы */
+  .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(28px, 4vw, 48px); }
+  .plan { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: grid; gap: 18px; align-content: start; }
+  .plan--hot { border-color: var(--blue); background: linear-gradient(180deg, rgba(59,107,255,.12), transparent 60%), var(--card); }
+  .plan__price { font-weight: 700; font-size: 40px; letter-spacing: -0.03em; line-height: 1; }
+  .plan__price small { font-size: 15px; color: var(--muted); font-weight: 500; letter-spacing: 0; margin-left: 6px; }
+  .plan__name { font-weight: 600; font-size: 16px; margin-top: 6px; }
+  .plan__stage { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .plan__d { color: var(--muted); font-size: 14.5px; }
+  .plan__list li { position: relative; padding-left: 22px; font-size: 14.5px; color: #D5DAE4; margin-top: 10px; }
+  .plan__list li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .plan__note { font-size: 13px; color: var(--dim); text-align: center; }
+  .plans__foot { text-align: center; margin-top: 32px; color: var(--muted); font-size: 15px; }
+
+  /* отзывы */
+  .quotes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+  .quote { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; display: grid; gap: 16px; align-content: start; }
+  .quote__mark { font-size: 40px; line-height: 1; color: var(--line-2); font-family: Georgia, serif; }
+  .quote__t { color: #D5DAE4; font-size: 15.5px; line-height: 1.6; }
+  .quote__who { display: flex; align-items: center; gap: 12px; }
+  .quote__av { width: 40px; height: 40px; border-radius: 50%; background: var(--card-2); border: 1px dashed var(--line-2); }
+  .quote__n { font-family: var(--mono); font-weight: 500; font-size: 13px; color: var(--muted); }
+  .quote__r { font-size: 13px; color: var(--dim); }
+
+  /* CTA-блок и форма */
+  .cta { text-align: center; padding: clamp(56px, 8vw, 96px) 0; }
+  .signup { max-width: 560px; margin: 26px auto 0; }
+  .signup__row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .signup__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .signup__input { flex: 1 1 220px; min-width: 0; height: 54px; padding: 0 16px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--card); color: var(--text); transition: border-color .15s, box-shadow .15s; }
+  .signup__input::placeholder { color: var(--dim); }
+  .signup__input:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px rgba(59,107,255,.25); }
+  .signup__hint { margin-top: 10px; font-size: 13.5px; color: var(--dim); }
+  .signup__done { margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: rgba(34,181,115,.15); color: var(--ok); font-size: 15px; }
+  .signup__done[hidden] { display: none; }
+
+  /* FAQ */
+  .faq { max-width: 820px; margin: clamp(24px, 4vw, 40px) auto 0; display: grid; gap: 10px; }
+  .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .faq summary { list-style: none; cursor: pointer; padding: 18px 22px; font-weight: 600; font-size: 16.5px; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: var(--mono); font-size: 20px; color: var(--muted); transition: transform .2s; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq__a { padding: 0 22px 20px; color: var(--muted); font-size: 15px; }
+  .faq__a code { font-family: var(--mono); font-size: 13px; background: var(--card-2); padding: 1px 6px; border-radius: 4px; color: var(--text); }
+
+  /* футер */
+  .foot { border-top: 1px solid var(--line); padding: clamp(40px, 6vw, 64px) 0 40px; }
+  .foot__cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+  .foot h4 { font-size: 14px; font-weight: 600; margin-bottom: 14px; }
+  .foot li { margin-top: 9px; font-size: 14px; color: var(--muted); }
+  .foot a { text-decoration: none; }
+  .foot a:hover { color: var(--text); }
+  .foot__box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+  .foot__box p { color: var(--muted); font-size: 14px; margin: 8px 0 14px; }
+  .foot__bottom { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 13.5px; color: var(--dim); }
+  .foot__bottom span a { margin-left: 18px; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0s); }
+  .reveal.is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .letter__sec, .term__line, .stage__bar::after { transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* адаптив */
+  @media (max-width: 1000px) {
+    .foot__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .steps::before { display: none; }
+    .nav { display: none; position: absolute; left: 0; right: 0; top: 64px; flex-direction: column; gap: 0; background: var(--bg-2); border-bottom: 1px solid var(--line); padding: 8px var(--gutter) 14px; }
+    .nav.is-open { display: flex; }
+    .nav a { padding: 12px 0; border-top: 1px solid var(--line); font-size: 16px; color: var(--text); }
+    .nav a:first-child { border-top: 0; }
+    .burger { display: flex; }
+  }
+  @media (max-width: 860px) {
+    .hero, .side, .proc, .quotes, .grid--2, .plans, .case { grid-template-columns: minmax(0, 1fr); }
+    .feats { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+    .case__shot { min-height: 180px; }
+  }
+  @media (max-width: 640px) {
+    .hero__dirs { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .steps, .foot__cols { grid-template-columns: minmax(0, 1fr); }
+    .top__right .ghostlink { display: none; }
+    .stages { font-size: 9.5px; }
+    .letter__sec { padding: 14px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top" data-top>
+  <div class="wrap top__in">
+    <a class="logo" href="./"><i aria-hidden="true"></i>email-verstka</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#templates">Ready emails</a>
+      <a href="#pipeline">From a brief</a>
+      <a href="../razbor/">Examples</a>
+      <a href="../proverka/">Check your email</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <div class="top__right">
+      <a class="ghostlink" href="../" lang="ru">RU</a>
+      <a class="btn" href="#beta">Join the beta</a>
+      <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav" data-burger><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <h1 class="hero__title">Describe the email in words. <em>It arrives intact</em> — in Outlook, Gmail and dark mode</h1>
+      <p class="hero__lead">email-verstka turns a brief, ready copy or a mockup screenshot into an HTML email built by the rules of email clients, checks it with a linter and hands you a file for your sending tool. Minutes instead of a week of revisions.</p>
+      <div class="hero__dirs">
+        <div class="dir">
+          <div class="dir__t">Build from a brief</div>
+          <p class="dir__d">Describe the email as you would to a colleague — the skill assembles the HTML, runs the linter and returns a file ready for your ESP.</p>
+          <a class="more" href="#pipeline">Learn more</a>
+        </div>
+        <div class="dir">
+          <div class="dir__t">Ready emails</div>
+          <p class="dir__d">Welcome, transactional and promo emails, already assembled and linted — a starting point for your brand.</p>
+          <a class="more" href="#templates">Learn more</a>
+        </div>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--lg" href="#beta">Join the beta</a>
+        <a class="btn btn--lg btn--ghost" href="../razbor/">See examples</a>
+      </div>
+    </div>
+
+    <div class="demo" data-demo>
+      <div class="prompt" aria-live="polite">
+        <div class="prompt__who"><span>you → email-verstka</span><button type="button" data-replay>↻ replay</button></div>
+        <div class="prompt__text"><span data-typed></span><span class="prompt__caret" data-caret></span></div>
+      </div>
+      <ol class="stages" aria-label="Pipeline stages">
+        <li class="stage" data-stage><span>01 brief</span><span class="stage__bar"></span></li>
+        <li class="stage" data-stage><span>02 brand</span><span class="stage__bar"></span></li>
+        <li class="stage" data-stage><span>03 structure</span><span class="stage__bar"></span></li>
+        <li class="stage" data-stage><span>04 markup</span><span class="stage__bar"></span></li>
+        <li class="stage" data-stage><span>05 linter</span><span class="stage__bar"></span></li>
+      </ol>
+      <div class="client" data-client>
+        <div class="client__bar">
+          <div class="client__meta">
+            <div class="client__subject" data-subject></div>
+            <div class="client__from"><b>Analytics service</b> · <span data-preheader></span></div>
+          </div>
+          <div class="theme" role="group" aria-label="Mail client theme">
+            <button class="theme__btn" type="button" data-theme="light" aria-pressed="true">Light</button>
+            <button class="theme__btn" type="button" data-theme="dark" aria-pressed="false">Dark</button>
+          </div>
+        </div>
+        <div class="client__body">
+          <div class="verdict-pop" data-verdict>✅ Passed · 15,075 bytes</div>
+          <div class="letter" aria-label="Email assembled by the skill">
+            <div class="letter__sec letter__sec--tight" data-sec><div class="letter__logo">logo-200×60</div></div>
+            <div class="letter__sec letter__sec--hero" data-sec><div class="letter__img">hero-600×240</div></div>
+            <div class="letter__sec" data-sec>
+              <h2>Welcome!</h2>
+              <p>You have signed up for the analytics service — now you have a place to see where your visitors come from, what they read and where they leave.</p>
+              <p>One step left — connect your site. It takes a couple of minutes: paste the tracking snippet, the service collects data on its own.</p>
+              <p class="letter__center"><a class="letter__btn" href="#beta">Connect your site</a></p>
+            </div>
+            <div class="letter__sec letter__sec--grey" data-sec>
+              <h3>What’s next</h3>
+              <ol>
+                <li>Connect your site: add the tracking snippet to every page.</li>
+                <li>Wait for the first data — usually within an hour.</li>
+                <li>Open the reports: traffic sources, pages, conversions.</li>
+              </ol>
+              <small>Something went wrong? Reply to this email — we’ll sort it out together.</small>
+            </div>
+            <div class="letter__sec" data-sec>
+              <p class="letter__foot"><a href="#beta">Unsubscribe</a><br>{{SENDER_ADDRESS}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="wrap">
+      <p class="strip__cap">Email clients whose constraints every email is built and checked against</p>
+      <div class="strip__row" aria-label="Email clients">
+        <span><i style="background:#0078D4"></i>Outlook</span>
+        <span><i style="background:#EA4335"></i>Gmail</span>
+        <span><i style="background:#1C8EF9"></i>Apple Mail</span>
+        <span><i style="background:#FC3F1D"></i>Yandex Mail</span>
+        <span><i style="background:#005FF9"></i>Mail.ru</span>
+        <span><i style="background:#3A424D"></i>Dark mode</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="flows">
+    <div class="wrap side">
+      <div class="side__l reveal"><h2 class="h2">Emails for every step of the user journey</h2></div>
+      <div class="feats">
+        <div class="feat reveal" style="--d:0s"><span class="tile tile--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 8 8 6 8-6"/></svg></span><div><div class="feat__t">Welcome &amp; onboarding</div><p class="feat__d">Lead a new user to the first step and set the tone. The skill writes the copy when there is none and places one primary button.</p><p class="feat__ex"><b>example:</b> “Welcome! One step left”</p></div></div>
+        <div class="feat reveal" style="--d:.08s"><span class="tile tile--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12l2 5H4z"/><path d="M4 7v13h16V7"/><path d="M9 11h6"/></svg></span><div><div class="feat__t">Transactional</div><p class="feat__d">Order received, application accepted, access granted. Amounts, dates and numbers come from your text — nothing invented.</p><p class="feat__ex"><b>example:</b> “Order A-104857 received”</p></div></div>
+        <div class="feat reveal" style="--d:.16s"><span class="tile tile--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18v4H3z"/><path d="M5 12v8h14v-8"/><path d="M12 8v12"/><path d="M12 8c-1.5-3-5.5-3-5.5-.5S10 8 12 8c1.5-3 5.5-3 5.5-.5S14 8 12 8"/></svg></span><div><div class="feat__t">Promo &amp; campaigns</div><p class="feat__d">Discount, collection, promo code, deadline. A big offer that reads without images; the button stays visible in dark mode.</p><p class="feat__ex"><b>example:</b> “30% off the whole catalogue — until the end of the week”</p></div></div>
+        <div class="feat reveal" style="--d:.24s"><span class="tile tile--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><div><div class="feat__t">Digests &amp; announcements</div><p class="feat__d">Article round-ups, webinars, product updates. A list of cards that does not fall apart in Outlook.</p><p class="feat__ex"><b>example:</b> “August digest: five articles on managing a team”</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="templates">
+    <div class="wrap side">
+      <div class="side__l reveal">
+        <h2 class="h2">Start from ready emails</h2>
+        <p class="lead">Assembled from briefs, passed the linter, shipped with a report and a structure file — take them as a starting point for your brand. Write-ups are in Russian; the emails speak for themselves.</p>
+        <ul class="list-b"><li>Welcome &amp; onboarding</li><li>Transactional</li><li>Order &amp; delivery</li><li>Promo &amp; collections</li><li>Digests &amp; notifications</li></ul>
+        <a class="more" href="../razbor/">All examples</a>
+      </div>
+      <div class="grid grid--2">
+        <article class="tpl reveal" style="--d:0s">
+          <h3 class="tpl__t"><a href="../razbor/welcome-posle-registratsii/" style="text-decoration:none">Welcome after sign-up</a></h3>
+          <a class="tpl__shot tpl__shot--img" href="../razbor/welcome-posle-registratsii/" aria-hidden="true" tabindex="-1"><img src="../razbor/welcome-posle-registratsii/preview.png" alt="" loading="lazy"></a>
+          <div class="tpl__meta"><span>5 sections · 36 warnings</span><span class="tpl__price">$0 <small>in beta</small></span></div>
+          <div class="tpl__tags"><span class="tag">HTML + TXT</span><span class="tag">report.md</span><span class="tag">15 KB</span></div>
+        </article>
+        <article class="tpl reveal" style="--d:.1s">
+          <h3 class="tpl__t"><a href="../razbor/zakaz-prinyat/" style="text-decoration:none">Order received</a></h3>
+          <a class="tpl__shot tpl__shot--img" href="../razbor/zakaz-prinyat/" aria-hidden="true" tabindex="-1"><img src="../razbor/zakaz-prinyat/preview.png" alt="" loading="lazy"></a>
+          <div class="tpl__meta"><span>transactional · 62 warnings</span><span class="tpl__price">$0 <small>in beta</small></span></div>
+          <div class="tpl__tags"><span class="tag">HTML + TXT</span><span class="tag">report.md</span><span class="tag">items table</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="trust">
+    <div class="wrap side">
+      <div class="side__l reveal"><h2 class="h2">Trustworthy by default</h2><a class="more" href="../razbor/">See all examples</a></div>
+      <div class="feats">
+        <div class="feat reveal" style="--d:0s"><span class="tile tile--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><div><div class="feat__t">Mobile friendly</div><p class="feat__d">A 600 px email that restacks on the phone: columns collapse, buttons stay buttons, type does not shrink.</p></div></div>
+        <div class="feat reveal" style="--d:.08s"><span class="tile tile--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 16 16 6l2 2L8 18H6z"/></svg></span><div><div class="feat__t">Copy when you have none</div><p class="feat__d">Give an idea — the skill writes subject, preheader and body for that step of the journey, and lists everything it assumed so you can proofread it.</p></div></div>
+        <div class="feat reveal" style="--d:.16s"><span class="tile tile--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg></span><div><div class="feat__t">Light &amp; dark themes</div><p class="feat__d">Dark mode is on for a sizeable share of readers. Backgrounds are pinned with fills, so your logo and button stay yours in both modes.</p></div></div>
+        <div class="feat reveal" style="--d:.24s"><span class="tile tile--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg></span><div><div class="feat__t">Cross-client compatibility</div><p class="feat__d">The same look everywhere: markup follows the constraints of Outlook, Gmail and Apple Mail, and the linter checks every section against the same rules.</p></div></div>
+        <div class="feat reveal" style="--d:.32s"><span class="tile tile--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="10" r="1.2" fill="currentColor"/><circle cx="12" cy="7" r="1.2" fill="currentColor"/><circle cx="16" cy="10" r="1.2" fill="currentColor"/><path d="M12 21c-2-3 1-5 3-5s3 2 3 2"/></svg></span><div><div class="feat__t">Your brand from your site</div><p class="feat__d">Give a URL — colours, font and logo are captured into <code>brand.json</code>. The next email is assembled in the same style.</p></div></div>
+        <div class="feat reveal" style="--d:.4s"><span class="tile tile--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v16H5z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></span><div><div class="feat__t">Plain-text version &amp; the essentials</div><p class="feat__d">Along with HTML — <code>email.txt</code>, preheader, unsubscribe link and sender address. Without them the linter will not release the email.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="pipeline">
+    <div class="wrap">
+      <div class="proc">
+        <div class="reveal">
+          <p class="kicker">Build from a brief</p>
+          <h2 class="h2">Describe what the email should be. The pipeline assembles it and checks every step</h2>
+          <p class="lead">The skill does not draw the email in one go: brief → brand → structure → markup → linter. Each stage writes a file, and the next one does not start until the previous passed its check.</p>
+        </div>
+        <div class="term reveal" data-term>
+          <div class="term__bar"><i></i><i></i><i></i><span>email-verstka · out/welcome-posle-registratsii</span></div>
+          <div class="term__body">
+            <div class="term__line cmd">lint structure out/welcome-posle-registratsii</div>
+            <div class="term__line ok">✓ structure.json: no errors</div>
+            <div class="term__line cmd">lint section sections/s-header.html</div>
+            <div class="term__line ok">✓ s-header: no errors</div>
+            <div class="term__line cmd">lint section sections/s-intro.html</div>
+            <div class="term__line"><span class="warn">! css-check</span> <span class="c">padding — rule not yet confirmed in every client (warning)</span></div>
+            <div class="term__line ok">✓ s-intro: no errors, 9 warnings</div>
+            <div class="term__line cmd">assemble out/welcome-posle-registratsii</div>
+            <div class="term__line c">→ email.html · email.txt · fills/ (4 dark-mode fills)</div>
+            <div class="term__line cmd">lint out/welcome-posle-registratsii</div>
+            <div class="term__line c">weight 15,075 bytes · preheader ok · unsubscribe ok · placeholders ok</div>
+            <div class="term__line"><span class="big">✅ Passed, warnings: 36</span></div>
+          </div>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="step reveal" style="--d:0s"><span class="step__n">1</span><h3 class="step__t">Brief</h3><p class="step__d">Words, ready copy or a screenshot. At most three questions, asked once — then no more stops.</p><p class="step__out"><b>Deliverable:</b><code>brief.md</code> with a “What was assumed” section</p></li>
+        <li class="step reveal" style="--d:.1s"><span class="step__n">2</span><h3 class="step__t">Brand</h3><p class="step__d">Colours, font and logo from your site by URL, from a description or a screenshot. Otherwise — a neutral default.</p><p class="step__out"><b>Deliverable:</b><code>brand.json</code></p></li>
+        <li class="step reveal" style="--d:.2s"><span class="step__n">3</span><h3 class="step__t">Structure</h3><p class="step__d">Sections and blocks: header, banner, text, button, list, footer. Checked: placeholders, unsubscribe, sender address.</p><p class="step__out"><b>Deliverable:</b><code>structure.json</code></p></li>
+        <li class="step reveal" style="--d:.3s"><span class="step__n">4</span><h3 class="step__t">Markup &amp; linter</h3><p class="step__d">Every section is coded and linted separately against the client constraints. The assembler returns the email, the linter — the verdict.</p><p class="step__out"><b>Deliverable:</b><code>email.html</code>, <code>email.txt</code>, <code>report.md</code></p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="examples">
+    <div class="wrap">
+      <h2 class="h2 h2--center reveal">Twelve emails of different genres, assembled from briefs</h2>
+      <p class="lead lead--center reveal">Each has its own page: the full email, the brief, what was assumed, the linter report and the files. Write-ups are in Russian.</p>
+      <div class="grid grid--2 mt">
+        <article class="case reveal" style="--d:0s"><a class="case__shot case__shot--img" href="../razbor/promo-rasprodazha-avgust/" aria-hidden="true" tabindex="-1"><img src="../razbor/promo-rasprodazha-avgust/preview.png" alt="" loading="lazy"></a><div class="case__body"><div><h3 class="case__t">Promo with a code and a deadline — the offer reads without images and in dark mode</h3><p class="case__m">promo · <b>✅ passed</b>, 41 warnings</p></div><a class="more" href="../razbor/promo-rasprodazha-avgust/">View showcase</a></div></article>
+        <article class="case reveal" style="--d:.08s"><a class="case__shot case__shot--img" href="../razbor/govuk-uvedomlenie/" aria-hidden="true" tabindex="-1"><img src="../razbor/govuk-uvedomlenie/preview.png" alt="" loading="lazy"></a><div class="case__body"><div><h3 class="case__t">A government-style notification — one column, large type, nothing extra</h3><p class="case__m">notification · style from a screenshot · <b>✅ passed</b>, 29 warnings</p></div><a class="more" href="../razbor/govuk-uvedomlenie/">View showcase</a></div></article>
+        <article class="case reveal" style="--d:.16s"><a class="case__shot case__shot--img" href="../razbor/daydzhest-avgusta/" aria-hidden="true" tabindex="-1"><img src="../razbor/daydzhest-avgusta/preview.png" alt="" loading="lazy"></a><div class="case__body"><div><h3 class="case__t">A five-card digest — a list that does not spill in Outlook</h3><p class="case__m">digest · <b>✅ passed</b>, 61 warnings</p></div><a class="more" href="../razbor/daydzhest-avgusta/">View showcase</a></div></article>
+        <article class="case reveal" style="--d:.24s"><a class="case__shot case__shot--img" href="../razbor/wikipedia-ezhegodnyy-sbor/" aria-hidden="true" tabindex="-1"><img src="../razbor/wikipedia-ezhegodnyy-sbor/preview.png" alt="" loading="lazy"></a><div class="case__body"><div><h3 class="case__t">A fundraising email in the site’s style — brand captured from the URL</h3><p class="case__m">fundraising · style from the site · <b>✅ passed</b>, 41 warnings</p></div><a class="more" href="../razbor/wikipedia-ezhegodnyy-sbor/">View showcase</a></div></article>
+      </div>
+      <p style="text-align:center;margin-top:28px"><a class="more" href="../razbor/">All 12 examples</a></p>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="pricing">
+    <div class="wrap">
+      <h2 class="h2 h2--center reveal">Beta first, prices later — from beta data, not out of thin air</h2>
+      <p class="lead lead--center reveal">We do not invent pricing upfront: the cost of an email is measured on real briefs from beta participants. Here is how it unfolds.</p>
+      <div class="plans">
+        <div class="plan plan--hot reveal" style="--d:0s"><div><p class="plan__stage">Stage 1 · now</p><div class="plan__price">$0<small>beta</small></div><div class="plan__name">Beta for the first 20 teams</div></div><p class="plan__d">You assemble real emails, we refine the skill on your briefs and measure the cost. In return we ask one thing — tell us what broke.</p><ul class="plan__list"><li>Unlimited builds for the duration of the beta</li><li>HTML and plain-text version, linter report</li><li>Mobile layout, light and dark themes</li><li>Your brand from your site</li><li>We review your briefs with you</li></ul><a class="btn btn--block" href="#beta">Take a seat</a><p class="plan__note">No card · invitation when your turn comes</p></div>
+        <div class="plan reveal" style="--d:.1s"><div><p class="plan__stage">Stage 2 · after the beta</p><div class="plan__price">−30%<small>forever</small></div><div class="plan__name">Early access for beta participants</div></div><p class="plan__d">When pricing appears, beta participants get it at a discount and keep everything they built: emails, brands, structures.</p><ul class="plan__list"><li>Below the public price — locked for the participant</li><li>Emails and brand.json carry over as they are</li><li>Edits in words, email series in one style</li><li>Priority brief reviews</li></ul><a class="btn btn--ghost btn--block" href="#beta">Join the beta to get it</a><p class="plan__note">One condition: be in the beta</p></div>
+        <div class="plan reveal" style="--d:.2s"><div><p class="plan__stage">Stage 3 · launch</p><div class="plan__price">From data<small>of the beta</small></div><div class="plan__name">Public plans: Solo and Team</div></div><p class="plan__d">Solo — for a marketer who assembles emails alone. Team — several brands, email series, test sends. Prices will be announced once the cost is measured on real emails.</p><ul class="plan__list"><li>Pay by link, no contract at the start</li><li>Limits per plan, a free tier with a watermark</li><li>Several brands — one brand.json per client</li><li>Duplicate an email as a template, test sends</li></ul><a class="btn btn--ghost btn--block" href="#beta">Notify me at launch</a><p class="plan__note">Date and prices — after the beta</p></div>
+      </div>
+      <p class="plans__foot reveal">Need an email series for your scenario or an ESP integration? <a class="more" href="#beta">Let’s talk</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="assumed">
+    <div class="wrap">
+      <h2 class="h2 h2--center reveal">The skill tells you what it made up. Verbatim from the reports</h2>
+      <p class="lead lead--center reveal">No testimonials yet — the beta has just opened. But every run has a “What was assumed” section: everything that was not in the brief and the skill decided on its own. That is your proofreading list before sending.</p>
+      <div class="quotes mt">
+        <div class="quote reveal" style="--d:0s"><span class="quote__mark" aria-hidden="true">“</span><p class="quote__t">The service has no name in the input, so the copy refers to it by what it does (“analytics service”), without a brand. Inserting the name is a one-line edit in three places.</p><div class="quote__who"><div><div class="quote__n">brief.md · What was assumed</div><div class="quote__r">Welcome after sign-up</div></div></div><a class="more" href="../razbor/welcome-posle-registratsii/">View showcase</a></div>
+        <div class="quote reveal" style="--d:.1s"><span class="quote__mark" aria-hidden="true">“</span><p class="quote__t">The order details are invented as a sample and must be replaced with store data: number A-104857, three line items, delivery, total 18,870 ₽, date 27 August and the 10:00–18:00 window.</p><div class="quote__who"><div><div class="quote__n">brief.md · What was assumed</div><div class="quote__r">Order received</div></div></div><a class="more" href="../razbor/zakaz-prinyat/">View showcase</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta section--alt" id="beta">
+    <div class="wrap">
+      <h2 class="h2 h2--center reveal">Want to try it on your own email?</h2>
+      <p class="lead lead--center reveal">Leave your work email — we will send an invitation to the beta when your turn comes.</p>
+      <form class="signup reveal" action="" method="post" data-signup>
+        <div class="signup__row">
+          <label class="signup__label" for="email-main">Work email</label>
+          <input class="signup__input" id="email-main" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" required>
+          <button class="btn btn--lg" type="submit">Join the beta</button>
+        </div>
+        <p class="signup__hint">One email with the invitation. Nothing else.</p>
+        <p class="signup__done" role="status" hidden>Your seat is reserved. We will write when access opens.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <h2 class="h2 h2--center reveal">Frequently asked questions</h2>
+      <div class="faq reveal">
+        <details><summary>Will my email look right on a phone?</summary><div class="faq__a">Yes. The email is built at 600 px and restacks for mobile screens: columns collapse, buttons stay tappable, type does not shrink. The linter checks the responsive rules as well.</div></details>
+        <details><summary>Can I check my design before leaving my email?</summary><div class="faq__a">You can. Send a mockup screenshot or your site URL in reply to the invitation — we will tell you what can be built as is and what has to be simplified for Outlook, and why. You can also run <a href="../proverka/">your existing HTML through our linter</a> right now.</div></details>
+        <details><summary>How many revisions are included?</summary><div class="faq__a">Unlimited during the beta. Edits are made in words (“move the button up”, “drop the banner”): only the affected section is rebuilt, not the whole email, and the linter checks it again.</div></details>
+        <details><summary>Will it really not fall apart in Outlook and dark mode?</summary><div class="faq__a">Markup follows the constraints of email clients, and the linter checks every section against the same rules and will not release an email with errors. Backgrounds are pinned with fills so dark mode does not recolour your brand. Warnings stay in the report — we list them rather than hide them.</div></details>
+        <details><summary>Which sending tools does it work with?</summary><div class="faq__a">Any ESP that accepts your own HTML: Mailchimp, Customer.io, Resend, SendGrid, Unisender and others. Unsubscribe, sender and main-button addresses are placeholders such as <code>{{UNSUBSCRIBE_URL}}</code> — your ESP fills in its own.</div></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__cols">
+      <div><h4>Product</h4><ul><li><a href="#pipeline">How it works</a></li><li><a href="../proverka/">Check your email</a></li><li><a href="#faq">FAQ</a></li><li><a href="../" lang="ru">Русская версия</a></li></ul></div>
+      <div><h4>Service</h4><ul><li><a href="#pipeline">Build from a brief</a></li><li><a href="#trust">Brand from your site</a></li><li><a href="#faq">Edits in words</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+      <div><h4>Ready emails</h4><ul><li><a href="../razbor/welcome-posle-registratsii/">Welcome: after sign-up</a></li><li><a href="../razbor/welcome-kurs-osnovy-illyustratsii/">Welcome: course enrolment</a></li><li><a href="../razbor/zakaz-prinyat/">Order received</a></li><li><a href="../razbor/promo-rasprodazha-avgust/">Promo: catalogue sale</a></li><li><a href="../razbor/osennyaya-kollektsiya/">Promo: autumn collection</a></li><li><a href="../razbor/daydzhest-avgusta/">Monthly digest</a></li><li><a href="../razbor/anons-vebinara-email-marketing/">Webinar announcement</a></li><li><a href="../razbor/govuk-uvedomlenie/">Application notification</a></li><li><a href="../razbor/wikipedia-ezhegodnyy-sbor/">Fundraising</a></li><li><a class="more more--muted" href="../razbor/">All examples</a></li></ul></div>
+      <div class="foot__box"><h4>Beta is open</h4><p>The first 20 teams assemble emails for free and get a below-public price after launch.</p><a class="btn btn--block" href="#beta">Join the beta</a></div>
+    </div>
+    <div class="foot__bottom"><span>© 2026 email-verstka · ASAP Mail. All rights reserved.</span><span><a href="#">Terms</a><a href="#">Privacy</a></span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var top = document.querySelector('[data-top]');
+  function onScroll() { top.classList.toggle('is-scrolled', window.scrollY > 20); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      en.target.classList.add('is-in');
+      if (en.target.hasAttribute('data-term')) runTerm(en.target);
+      io.unobserve(en.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  function runTerm(term) {
+    term.querySelectorAll('.term__line').forEach(function (l, i) {
+      setTimeout(function () { l.classList.add('is-in'); }, reduce ? 0 : 240 * i + 200);
+    });
+  }
+
+  /* Демо сборки */
+  var demo = document.querySelector('[data-demo]');
+  var typed = demo.querySelector('[data-typed]'), caret = demo.querySelector('[data-caret]');
+  var stages = demo.querySelectorAll('[data-stage]'), secs = demo.querySelectorAll('[data-sec]');
+  var subject = demo.querySelector('[data-subject]'), pre = demo.querySelector('[data-preheader]');
+  var verdict = demo.querySelector('[data-verdict]');
+  var BRIEF = 'Welcome email after sign-up for an analytics service. Goal: get the user to the first step — a “Connect your site” button. Header, banner, greeting, a three-step “What’s next”. No images yet — use placeholders. Friendly tone.';
+  var SUBJECT = 'Welcome! One step left';
+  var PRE = 'Connect your site — and the first reports will show up today.';
+  var timers = [];
+  function later(fn, ms) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
+  function play() {
+    timers.forEach(clearTimeout); timers = [];
+    demo.classList.add('is-building');
+    typed.textContent = ''; caret.classList.remove('is-off');
+    subject.textContent = ''; pre.textContent = ''; verdict.classList.remove('is-on');
+    stages.forEach(function (s) { s.classList.remove('is-on', 'is-done'); });
+    secs.forEach(function (s) { s.classList.remove('is-in'); });
+    var i = 0;
+    function type() {
+      if (reduce) { typed.textContent = BRIEF; afterType(); return; }
+      typed.textContent = BRIEF.slice(0, ++i);
+      if (i < BRIEF.length) timers.push(setTimeout(type, 16 + (BRIEF[i] === ' ' ? 18 : 0)));
+      else afterType();
+    }
+    function afterType() {
+      caret.classList.add('is-off');
+      var t = 300;
+      stages.forEach(function (s, k) {
+        later(function () { s.classList.add('is-on'); }, t + k * 500);
+        later(function () { s.classList.add('is-done'); }, t + k * 500 + 460);
+      });
+      later(function () { subject.textContent = SUBJECT; pre.textContent = PRE; }, t + 2 * 500 + 200);
+      var base = t + 3 * 500;
+      secs.forEach(function (s, k) { later(function () { s.classList.add('is-in'); }, base + k * 200); });
+      later(function () { verdict.classList.add('is-on'); }, base + secs.length * 200 + 300);
+    }
+    later(type, 500);
+  }
+  demo.querySelector('[data-replay]').addEventListener('click', play);
+  play();
+
+  var client = demo.querySelector('[data-client]');
+  client.querySelectorAll('.theme__btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      client.classList.toggle('is-dark', btn.dataset.theme === 'dark');
+      client.querySelectorAll('.theme__btn').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+    });
+  });
+
+  /* Бургер */
+  var burger = document.querySelector('[data-burger]'), nav = document.getElementById('nav');
+  burger.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') { nav.classList.remove('is-open'); burger.setAttribute('aria-expanded', 'false'); } });
+
+  /* Форма: бэкенда нет — показываем состояние, не отправляем. Появится action — уберите. */
+  document.querySelectorAll('[data-signup]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      if (!form.getAttribute('action')) {
+        e.preventDefault();
+        form.querySelector('.signup__done').hidden = false;
+        form.querySelector('.signup__input').value = '';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

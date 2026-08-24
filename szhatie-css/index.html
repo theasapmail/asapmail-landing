@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сжатие CSS онлайн — компрессор email-verstka</title>
+<meta name="description" content="Бесплатное сжатие CSS-кода в браузере: комментарии, пробелы и лишние точки с запятой убираются, строки, url() и calc() не трогаются. Код никуда не отправляется.">
+<link rel="canonical" href="https://theasapmail.github.io/asapmail-landing/szhatie-css/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:site_name" content="email-verstka">
+<meta property="og:title" content="Сжатие CSS онлайн — компрессор email-verstka"><meta property="og:description" content="Бесплатное сжатие CSS-кода в браузере: комментарии, пробелы и лишние точки с запятой убираются, строки, url() и calc() не трогаются. Код никуда не отправляется.">
+<meta property="og:url" content="https://theasapmail.github.io/asapmail-landing/szhatie-css/"><meta property="og:image" content="https://theasapmail.github.io/asapmail-landing/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="../site.css">
+<!-- Яндекс Метрика: впишите номер счётчика вместо YM_ID и раскомментируйте.
+<script type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");ym(YM_ID,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});</script>
+-->
+</head><body><header class="top" data-top><div class="wrap top__in">
+  <a class="logo" href="../"><i aria-hidden="true"></i>email-verstka</a>
+  <nav class="nav" id="nav" aria-label="Разделы"><a href="../#shablony">Готовые письма</a><a href="../#sborka">Сборка из брифа</a><a href="../razbor/">Примеры</a><a href="../proverka/">Проверить письмо</a></nav>
+  <div class="top__right"><a class="ghostlink" href="../en/">EN</a><a class="btn" href="../#beta">Попасть в бету</a><button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav" data-burger><span></span><span></span><span></span></button></div>
+</div></header>
+<main>
+<div class="wrap"><nav class="crumbs" aria-label="Хлебные крошки"><a href="../">Главная</a><span>/</span>Сжатие CSS</nav></div>
+<section class="wrap" style="padding-top:22px;padding-bottom:clamp(32px,5vw,48px)">
+  <p class="kicker">Бесплатно · в браузере · ничего не отправляется</p>
+  <h1 class="h1">Сжатие CSS без сюрпризов</h1>
+  <p class="lead">Вставьте CSS — компрессор уберёт комментарии, пробелы и лишние точки с запятой, ужмёт нули и цвета. Строки, <code>url()</code> и <code>calc()</code> не трогаются, пробел перед <code>:</code> в селекторах сохраняется. Всё считается у вас в браузере, код никуда не уходит.</p>
+</section>
+<section class="wrap lintform">
+  <div class="lintform__in">
+    <label for="src" class="lintform__label">Код для вставки</label>
+    <textarea id="src" class="lintform__ta" spellcheck="false" placeholder=".btn { color: #ffffff; margin: 0px; }" data-src></textarea>
+    <div class="lintform__row"><button class="btn btn--lg" type="button" data-run>Сжать</button><button class="btn btn--ghost" type="button" data-clear>Очистить</button><span class="lintform__hint" data-hint></span></div>
+  </div>
+  <div class="lintform__out" data-out hidden>
+    <div class="lintres__head"><span class="verdict" data-stats></span></div>
+    <label for="res" class="lintform__label" style="margin-top:14px">Результат</label>
+    <textarea id="res" class="lintform__ta" style="min-height:180px" readonly spellcheck="false" data-res></textarea>
+    <div class="lintform__row"><button class="btn" type="button" data-copy>Скопировать</button></div>
+  </div>
+</section>
+<section class="section"><div class="wrap split">
+  <div><h2 class="h2">Что делает компрессор</h2></div>
+  <ul class="results"><li>комментарии, отступы и пробелы вокруг <code>{ } ; , &gt;</code> — долой, последняя точка с запятой в блоке тоже</li><li>нулевые длины ужимаются: <code>margin: 0px</code> → <code>margin:0</code>; <code>0%</code> не трогается — он значим в keyframes и flex-basis</li><li>цвета вида <code>#ffffff</code> сокращаются до <code>#fff</code></li><li>строки, <code>url()</code> и <code>calc()</code> остаются как есть — внутри них пробелы и единицы значимы</li></ul>
+</div></section>
+<section class="wrap" style="padding-bottom:clamp(24px,4vw,40px)"><p class="sub">Ещё бесплатное: <a href="../szhatie-html/">сжатие HTML</a> и <a href="../proverka/">проверка письма линтером почтовых клиентов</a>.</p></section>
+</main>
+<section class="cta section--alt"><div class="wrap"><h2 class="h2">Хотите такое же письмо под свой бренд?</h2><p>Бета открыта для первых 20 команд — бесплатно, на ваших брифах.</p><a class="btn btn--lg" href="../#beta">Попасть в бету</a></div></section><footer class="foot">
+  <div class="wrap">
+    <div class="foot__cols">
+      <div>
+        <h4>О продукте</h4>
+        <ul>
+          <li><a href="../#sborka">Как работает</a></li>
+          <li><a href="../proverka/">Проверить своё письмо</a></li>
+          <li><a href="../szhatie-html/">Сжать HTML</a></li>
+          <li><a href="../szhatie-css/">Сжать CSS</a></li>
+          <li><a href="../knopka-dlya-pisma/">Кнопка для письма</a></li>
+          <li><a href="../prevyu-vhodyashchih/">Превью входящих</a></li>
+          <li><a href="../#faq">Вопросы</a></li>
+          <li><a href="../en/" lang="en">English</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Сервис</h4>
+        <ul>
+          <li><a href="../#sborka">Сборка из брифа</a></li>
+          <li><a href="../#nadyozhno">Бренд с сайта</a></li>
+          <li><a href="../#faq">Правки словами</a></li>
+          <li><a href="../#tarify">Тарифы</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Готовые письма</h4>
+        <ul>
+          <li><a href="../razbor/welcome-posle-registratsii/">Welcome: после регистрации</a></li>
+          <li><a href="../razbor/welcome-kurs-osnovy-illyustratsii/">Welcome: запись на курс</a></li>
+          <li><a href="../razbor/zakaz-prinyat/">Заказ принят</a></li>
+          <li><a href="../razbor/promo-rasprodazha-avgust/">Промо: скидка на каталог</a></li>
+          <li><a href="../razbor/osennyaya-kollektsiya/">Промо: осенняя коллекция</a></li>
+          <li><a href="../razbor/daydzhest-avgusta/">Дайджест месяца</a></li>
+          <li><a href="../razbor/anons-vebinara-email-marketing/">Анонс вебинара</a></li>
+          <li><a href="../razbor/govuk-uvedomlenie/">Уведомление о заявлении</a></li>
+          <li><a href="../razbor/wikipedia-ezhegodnyy-sbor/">Сбор пожертвований</a></li>
+          <li><a class="more more--muted" href="../razbor/">Все примеры</a></li>
+        </ul>
+      </div>
+      <div class="foot__box">
+        <h4>Бета открыта</h4>
+        <p>Первые 20 команд собирают письма бесплатно и получают тариф ниже публичного после запуска.</p>
+        <a class="btn btn--block" href="../#beta">Попасть в бету</a>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 email-verstka · ASAP Mail. Все права защищены. Сайт обновляется автоматически из основного репозитория.</span>
+      <span><a href="#">Условия использования</a><a href="#">Конфиденциальность</a></span>
+    </div>
+  </div>
+</footer>
+<script src="minify.js"></script>
+<script>
+(function(){var fn=window.emailVerstkaMinifyHtml||window.emailVerstkaMinifyCss;
+var src=document.querySelector('[data-src]'),res=document.querySelector('[data-res]'),out=document.querySelector('[data-out]'),hint=document.querySelector('[data-hint]');
+function bytes(s){return new Blob([s]).size}
+function fmt(n){return n.toLocaleString('ru-RU')}
+function run(){var v=src.value;if(!v.trim()){hint.textContent='Вставьте код для сжатия.';return}hint.textContent='';var m=fn(v),a=bytes(v),b=bytes(m);out.hidden=false;res.value=m;
+var s=document.querySelector('[data-stats]');s.textContent=a>b?('−'+Math.round((a-b)*1000/a)/10+'%: было '+fmt(a)+' байт, стало '+fmt(b)):('сжимать нечего: '+fmt(b)+' байт');s.className='verdict '+(a>b?'ok':'');
+var g=document.querySelector('[data-gmail]');if(g)g.textContent=b>102400?'⚠ тяжелее 102 КБ — Gmail обрежет такое письмо':'в пределах порога Gmail (102 КБ)';
+out.scrollIntoView({behavior:'smooth',block:'start'})}
+document.querySelector('[data-run]').addEventListener('click',run);
+document.querySelector('[data-clear]').addEventListener('click',function(){src.value='';res.value='';out.hidden=true;hint.textContent='';src.focus()});
+document.querySelector('[data-copy]').addEventListener('click',function(){var b=this;function done(ok){b.textContent=ok?'Скопировано':'Не удалось';setTimeout(function(){b.textContent='Скопировать'},1500)}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(res.value).then(function(){done(true)},function(){done(false)})}else{res.select();done(document.execCommand('copy'))}});
+src.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='Enter')run()});})();
+</script>
+<script>(function(){var b=document.querySelector('[data-burger]'),n=document.getElementById('nav');if(!b||!n)return;b.addEventListener('click',function(){var o=n.classList.toggle('is-open');b.setAttribute('aria-expanded',String(o));document.body.classList.toggle('nav-open',o)});n.addEventListener('click',function(e){if(e.target.tagName==='A'){n.classList.remove('is-open');b.setAttribute('aria-expanded','false');document.body.classList.remove('nav-open')}})})();</script>
+</body></html>

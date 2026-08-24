@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "lang": "ru",
+  "width": 600,
+  "subject": "Скидка 30% на весь каталог — до конца недели",
+  "preheader": "Промокод AUGUST30 снижает цену всего каталога на 30% — успейте до воскресенья",
+  "brand": {
+    "$ref": "brand.json"
+  },
+  "sections": [
+    {
+      "id": "s-header",
+      "background": "#FFFFFF",
+      "padding": [
+        24,
+        24
+      ],
+      "blocks": [
+        {
+          "id": "b-header-logo",
+          "type": "logo",
+          "src": "{{ASSETS_BASE}}/logo-200x60.png",
+          "width": 200,
+          "height": 60,
+          "alt": "Логотип магазина",
+          "href": "{{CTA_URL}}",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-hero",
+      "background": "#FFFFFF",
+      "padding": [
+        0,
+        32
+      ],
+      "blocks": [
+        {
+          "id": "b-hero-image",
+          "type": "image",
+          "src": "{{ASSETS_BASE}}/hero-600x300.jpg",
+          "width": 600,
+          "height": 300,
+          "alt": "Баннер: распродажа со скидкой 30% на весь каталог",
+          "href": null
+        },
+        {
+          "id": "b-hero-h1",
+          "type": "text",
+          "role": "h1",
+          "text": "Скидка 30% на весь каталог",
+          "align": "center"
+        },
+        {
+          "id": "b-hero-lead",
+          "type": "text",
+          "role": "p",
+          "text": "До конца недели цена ниже на 30% — на всё, что есть в каталоге, без деления на категории и коллекции. Скидку включает промокод AUGUST30.",
+          "align": "center"
+        },
+        {
+          "id": "b-hero-cta",
+          "type": "button",
+          "text": "Перейти в каталог",
+          "href": "{{CTA_URL}}",
+          "primary": true,
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-promokod",
+      "background": "#F5F5F5",
+      "padding": [
+        32,
+        32
+      ],
+      "blocks": [
+        {
+          "id": "b-promokod-label",
+          "type": "text",
+          "role": "small",
+          "text": "Промокод",
+          "align": "center"
+        },
+        {
+          "id": "b-promokod-code",
+          "type": "text",
+          "role": "h2",
+          "text": "AUGUST30",
+          "align": "center"
+        },
+        {
+          "id": "b-promokod-term",
+          "type": "text",
+          "role": "p",
+          "text": "Действует до конца недели",
+          "align": "center"
+        }
+      ]
+    },
+    {
+      "id": "s-usloviya",
+      "background": "#FFFFFF",
+      "padding": [
+        32,
+        32
+      ],
+      "blocks": [
+        {
+          "id": "b-usloviya-title",
+          "type": "text",
+          "role": "h2",
+          "text": "Коротко об условиях",
+          "align": "left"
+        },
+        {
+          "id": "b-usloviya-list",
+          "type": "list",
+          "items": [
+            "Скидка 30% — на весь каталог, без исключений по категориям.",
+            "Промокод AUGUST30 вводится в корзине, при оформлении заказа.",
+            "Предложение действует до конца недели, по воскресенье включительно."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s-footer",
+      "background": "#F5F5F5",
+      "padding": [
+        24,
+        24
+      ],
+      "blocks": [
+        {
+          "id": "b-footer-main",
+          "type": "footer",
+          "links": [
+            {
+              "text": "Отписаться от рассылки",
+              "href": "{{UNSUBSCRIBE_URL}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
